@@ -11,7 +11,6 @@
     <link rel="manifest" href="/Fantasy-Golf/manifest.json">
     <link rel="icon" type="image/x-icon" href="/Fantasy-Golf/favicon.ico">
     <link rel="apple-touch-icon" href="/Fantasy-Golf/icon-192.png">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -21,13 +20,11 @@
         }
 
         :root {
-            --green-dark: #0d3b2e;
-            --green-primary: #1a5c42;
-            --green-light: #2d7a5f;
-            --cream: #f5f1e8;
-            --gold: #d4af37;
+            --masters-green: #00441b;
+            --black: #000000;
             --white: #ffffff;
-            --shadow: rgba(13, 59, 46, 0.15);
+            --gold: #d4af37;
+            --shadow: rgba(0, 0, 0, 0.15);
         }
 
         html {
@@ -36,9 +33,9 @@
         }
 
         body {
-            font-family: 'Crimson Pro', serif;
-            background: linear-gradient(135deg, var(--cream) 0%, #e8e2d5 100%);
-            color: var(--green-dark);
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            background: var(--white);
+            color: var(--black);
             min-height: 100vh;
             padding: 0;
             overscroll-behavior: none;
@@ -48,30 +45,34 @@
 
         /* Header */
         header {
-            background: var(--green-dark);
-            color: var(--cream);
-            padding: 2rem 2rem 1.5rem;
-            border-bottom: 4px solid var(--gold);
-            box-shadow: 0 4px 20px var(--shadow);
+            background: #ffffff !important;
+            background-color: #ffffff !important;
+            color: var(--black);
+            padding: 1.5rem 2rem;
+            border-bottom: 3px solid var(--masters-green);
+            box-shadow: 0 2px 10px var(--shadow);
         }
 
         .header-content {
             max-width: 1400px;
             margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .header-logo {
+            width: 70px;
+            height: 70px;
         }
 
         h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 3.5rem;
-            letter-spacing: 3px;
-            margin-bottom: 0.5rem;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-size: 4rem;
+            font-weight: bold;
+            letter-spacing: 12px;
+            margin: 0;
             color: var(--gold);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .season-info {
-            font-size: 1.1rem;
-            opacity: 0.9;
         }
 
         /* Login Screen */
@@ -82,13 +83,15 @@
             padding: 3rem;
             border-radius: 12px;
             box-shadow: 0 8px 32px var(--shadow);
-            border: 2px solid var(--green-light);
+            border: 2px solid var(--masters-green);
         }
 
         .login-container h2 {
-            font-family: 'Bebas Neue', sans-serif;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
             font-size: 2.5rem;
-            color: var(--green-dark);
+            font-weight: bold;
+            color: var(--masters-green);
             margin-bottom: 2rem;
             text-align: center;
             letter-spacing: 2px;
@@ -102,18 +105,19 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: var(--green-dark);
+            color: var(--masters-green);
         }
 
         select, input {
             width: 100%;
             padding: 0.75rem;
-            border: 2px solid var(--green-light);
+            border: 2px solid var(--masters-green);
             border-radius: 6px;
             font-size: 1rem;
-            font-family: 'Crimson Pro', serif;
-            background: var(--cream);
-            color: var(--green-dark);
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
+            background: var(--white);
+            color: var(--masters-green);
         }
 
         select:focus, input:focus {
@@ -124,22 +128,34 @@
         button {
             width: 100%;
             padding: 1rem;
-            background: var(--green-primary);
-            color: var(--cream);
+            background: var(--masters-green);
+            color: var(--white);
             border: none;
             border-radius: 6px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Bebas Neue', sans-serif;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
             letter-spacing: 1px;
         }
 
         button:hover {
-            background: var(--green-light);
+            background: var(--masters-green);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        /* Login button - gold */
+        .login-container button {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .login-container button:hover {
+            background: var(--gold);
+            opacity: 0.9;
         }
 
         /* Main Container */
@@ -163,73 +179,112 @@
 
         .nav-btn {
             padding: 0.75rem 1.5rem;
-            background: var(--cream);
-            border: 2px solid var(--green-light);
+            background: var(--white);
+            border: 2px solid var(--masters-green);
             border-radius: 8px;
             cursor: pointer;
-            font-family: 'Bebas Neue', sans-serif;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
             font-size: 1.1rem;
             letter-spacing: 1px;
-            color: var(--green-dark);
+            color: var(--masters-green);
             transition: all 0.3s ease;
         }
 
         .nav-btn:hover, .nav-btn.active {
-            background: var(--green-primary);
-            color: var(--cream);
-            border-color: var(--green-primary);
+            background: var(--masters-green);
+            color: var(--white);
+            border-color: var(--masters-green);
         }
 
-        /* Cards */
+        /* Cards - Masters Style */
         .card {
             background: var(--white);
             padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px var(--shadow);
+            border-radius: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
-            border: 2px solid var(--green-light);
+            border: 3px solid var(--masters-green);
+            overflow: hidden;
         }
 
+        /* Standings Table - Masters Style */
         .card h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            color: var(--green-dark);
-            margin-bottom: 1.5rem;
-            letter-spacing: 2px;
-            border-bottom: 3px solid var(--gold);
-            padding-bottom: 0.5rem;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
+            font-size: 2.5rem;
+            color: var(--black);
+            margin-bottom: 0;
+            letter-spacing: 4px;
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--masters-green);
+            color: var(--white);
+            border-radius: 0;
+            margin: -2rem -2rem 0 -2rem;
         }
 
-        /* Standings Table */
         table {
             width: 100%;
             border-collapse: collapse;
+            background: var(--white);
+            margin-top: 0;
         }
 
         thead {
-            background: var(--green-dark);
-            color: var(--cream);
-        }
-
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--green-light);
+            background: var(--masters-green);
+            color: var(--white);
         }
 
         th {
-            font-family: 'Bebas Neue', sans-serif;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 1rem;
+            text-align: center;
+            border-right: 2px solid rgba(255,255,255,0.2);
+        }
+
+        th:last-child {
+            border-right: none;
+        }
+
+        td {
+            padding: 1.2rem 1rem;
+            text-align: center;
+            border-bottom: 2px solid #e0e0e0;
             font-size: 1.1rem;
-            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        tbody tr {
+            background: var(--white);
+        }
+
+        tbody tr:nth-child(odd) {
+            background: #fafafa;
         }
 
         tbody tr:hover {
-            background: var(--cream);
+            background: #f0f0f0;
         }
 
-        .rank-1 { font-weight: bold; color: var(--gold); }
-        .rank-2 { font-weight: bold; color: #c0c0c0; }
-        .rank-3 { font-weight: bold; color: #cd7f32; }
+        /* Rank styling - Masters style */
+        .rank-1 { 
+            font-weight: bold; 
+            color: var(--masters-green);
+            font-size: 1.3rem;
+        }
+        .rank-2 { 
+            font-weight: bold; 
+            color: var(--black);
+        }
+        .rank-3 { 
+            font-weight: bold; 
+            color: var(--black);
+        }
 
         /* Player List */
         .player-list {
@@ -240,8 +295,8 @@
 
         .player-card {
             padding: 1rem;
-            background: var(--cream);
-            border: 2px solid var(--green-light);
+            background: var(--white);
+            border: 2px solid var(--masters-green);
             border-radius: 8px;
             position: relative;
         }
@@ -262,7 +317,7 @@
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
-            color: var(--green-dark);
+            color: var(--masters-green);
         }
 
         .player-points {
@@ -280,7 +335,8 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-family: 'Bebas Neue', sans-serif;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
             letter-spacing: 1px;
         }
 
@@ -297,8 +353,8 @@
         }
 
         .stat-box {
-            background: var(--green-primary);
-            color: var(--cream);
+            background: var(--masters-green);
+            color: var(--white);
             padding: 1.5rem;
             border-radius: 8px;
             text-align: center;
@@ -314,7 +370,8 @@
         .stat-value {
             font-size: 2.5rem;
             font-weight: bold;
-            font-family: 'Bebas Neue', sans-serif;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
             color: var(--gold);
         }
 
@@ -329,26 +386,27 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem;
-            border-bottom: 1px solid var(--green-light);
+            border-bottom: 1px solid var(--masters-green);
         }
 
         .pool-player:hover {
-            background: var(--cream);
+            background: var(--white);
         }
 
         .add-btn {
             padding: 0.5rem 1.5rem;
-            background: var(--green-primary);
-            color: var(--cream);
+            background: var(--masters-green);
+            color: var(--white);
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-family: 'Bebas Neue', sans-serif;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
             letter-spacing: 1px;
         }
 
         .add-btn:hover {
-            background: var(--green-light);
+            background: var(--masters-green);
         }
 
         .add-btn:disabled {
@@ -360,7 +418,7 @@
         .transaction {
             padding: 1rem;
             border-left: 4px solid var(--gold);
-            background: var(--cream);
+            background: var(--white);
             margin-bottom: 1rem;
             border-radius: 4px;
         }
@@ -388,7 +446,7 @@
         .search-box input {
             width: 100%;
             padding: 0.75rem;
-            border: 2px solid var(--green-light);
+            border: 2px solid var(--masters-green);
             border-radius: 6px;
             font-size: 1rem;
         }
@@ -400,18 +458,19 @@
             right: 2rem;
             padding: 0.5rem 1.5rem;
             background: transparent;
-            border: 2px solid var(--cream);
-            color: var(--cream);
+            border: 2px solid var(--white);
+            color: var(--white);
             border-radius: 6px;
             cursor: pointer;
-            font-family: 'Bebas Neue', sans-serif;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
             letter-spacing: 1px;
             transition: all 0.3s ease;
         }
 
         .logout-btn:hover {
-            background: var(--cream);
-            color: var(--green-dark);
+            background: var(--white);
+            color: var(--masters-green);
         }
 
         @media (max-width: 768px) {
@@ -475,7 +534,7 @@
 <body>
     <!-- Login Screen -->
     <div id="loginScreen" class="login-container">
-        <h2>League Login</h2>
+        <h2>Enter League</h2>
         <form id="loginForm">
             <div class="form-group">
                 <label for="teamSelect">Select Your Team</label>
@@ -504,10 +563,9 @@
     <!-- Main App -->
     <div id="mainApp" class="hidden">
         <header>
-            <button class="logout-btn" onclick="logout()">Logout</button>
             <div class="header-content">
-                <h1>Fantasy Golf League 2026</h1>
-                <div class="season-info">First Half: Through PGA Championship | Second Half: Through Tour Championship</div>
+                <img src="/Fantasy-Golf/icon-192.png" alt="FG League" class="header-logo" onerror="this.style.display='none'">
+                <h1>2026</h1>
             </div>
         </header>
 
@@ -635,11 +693,11 @@
     </div>
 
     <script>
-        // Register Service Worker for PWA
+        // Register Service Worker for PWA (silently fail if not available)
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/Fantasy-Golf/service-worker.js')
-                .then(reg => console.log('Service Worker registered'))
-                .catch(err => console.log('Service Worker registration failed'));
+                .then(() => {})
+                .catch(() => {});
         }
 
         // iOS Install Prompt
@@ -656,21 +714,21 @@
                     bottom: 0;
                     left: 0;
                     right: 0;
-                    background: var(--green-dark);
-                    color: var(--cream);
+                    background: var(--masters-green);
+                    color: var(--white);
                     padding: 1.5rem;
                     text-align: center;
                     z-index: 10000;
                     box-shadow: 0 -4px 20px var(--shadow);
                 `;
                 installDiv.innerHTML = `
-                    <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; margin-bottom: 0.5rem;">
+                    <div style="font-family: 'Liberation Serif', 'Georgia', serif; font-size: 1.2rem; margin-bottom: 0.5rem;">
                         Install App
                     </div>
                     <div style="font-size: 0.9rem; margin-bottom: 1rem;">
                         Tap the Share button <span style="font-size: 1.2rem;">⬆️</span> and select "Add to Home Screen"
                     </div>
-                    <button onclick="this.parentElement.remove()" style="padding: 0.5rem 2rem; background: var(--gold); color: var(--green-dark); border: none; border-radius: 6px; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 1px; cursor: pointer;">
+                    <button onclick="this.parentElement.remove()" style="padding: 0.5rem 2rem; background: var(--gold); color: var(--masters-green); border: none; border-radius: 6px; font-family: 'Liberation Serif', 'Georgia', serif; font-size: 1rem; letter-spacing: 1px; cursor: pointer;">
                         Got It
                     </button>
                 `;
