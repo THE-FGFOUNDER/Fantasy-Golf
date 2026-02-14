@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FG League">
+    <meta name="theme-color" content="#0d3b2e">
+    <title>Fantasy Golf League 2026</title>
+    <link rel="manifest" href="/Fantasy-Golf/manifest.json">
+    <link rel="icon" type="image/x-icon" href="/Fantasy-Golf/favicon.ico">
+    <link rel="apple-touch-icon" href="/Fantasy-Golf/icon-192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --green-dark: #0d3b2e;
+            --green-primary: #1a5c42;
+            --green-light: #2d7a5f;
+            --cream: #f5f1e8;
+            --gold: #d4af37;
+            --white: #ffffff;
+            --shadow: rgba(13, 59, 46, 0.15);
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: linear-gradient(135deg, var(--cream) 0%, #e8e2d5 100%);
+            color: var(--green-dark);
+            min-height: 100vh;
+            padding: 0;
+            overscroll-behavior: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header */
+        header {
+            background: var(--green-dark);
+            color: var(--cream);
+            padding: 2rem 2rem 1.5rem;
+            border-bottom: 4px solid var(--gold);
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .season-info {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Login Screen */
+        .login-container {
+            max-width: 500px;
+            margin: 100px auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px var(--shadow);
+            border: 2px solid var(--green-light);
+        }
+
+        .login-container h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--green-dark);
+            margin-bottom: 2rem;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--green-dark);
+        }
+
+        select, input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--green-light);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Crimson Pro', serif;
+            background: var(--cream);
+            color: var(--green-dark);
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--green-primary);
+            color: var(--cream);
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: var(--green-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px var(--shadow);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--cream);
+            border: 2px solid var(--green-light);
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            color: var(--green-dark);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--green-primary);
+            color: var(--cream);
+            border-color: var(--green-primary);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow);
+            margin-bottom: 2rem;
+            border: 2px solid var(--green-light);
+        }
+
+        .card h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--green-dark);
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+            border-bottom: 3px solid var(--gold);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Standings Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: var(--green-dark);
+            color: var(--cream);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--green-light);
+        }
+
+        th {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        tbody tr:hover {
+            background: var(--cream);
+        }
+
+        .rank-1 { font-weight: bold; color: var(--gold); }
+        .rank-2 { font-weight: bold; color: #c0c0c0; }
+        .rank-3 { font-weight: bold; color: #cd7f32; }
+
+        /* Player List */
+        .player-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .player-card {
+            padding: 1rem;
+            background: var(--cream);
+            border: 2px solid var(--green-light);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .player-card.droppable {
+            border-color: #c44536;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .player-card.droppable:hover {
+            background: #fff0ed;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        .player-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--green-dark);
+        }
+
+        .player-points {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .drop-btn {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            background: #c44536;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .drop-btn:hover {
+            background: #a03428;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-box {
+            background: var(--green-primary);
+            color: var(--cream);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--gold);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--gold);
+        }
+
+        /* Available Players */
+        .player-pool {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .pool-player {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--green-light);
+        }
+
+        .pool-player:hover {
+            background: var(--cream);
+        }
+
+        .add-btn {
+            padding: 0.5rem 1.5rem;
+            background: var(--green-primary);
+            color: var(--cream);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .add-btn:hover {
+            background: var(--green-light);
+        }
+
+        .add-btn:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+        /* Transaction History */
+        .transaction {
+            padding: 1rem;
+            border-left: 4px solid var(--gold);
+            background: var(--cream);
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+
+        .transaction-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .transaction-details {
+            font-weight: 600;
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none;
+        }
+
+        /* Search */
+        .search-box {
+            margin-bottom: 1.5rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--green-light);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        /* Logout */
+        .logout-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            padding: 0.5rem 1.5rem;
+            background: transparent;
+            border: 2px solid var(--cream);
+            color: var(--cream);
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: var(--cream);
+            color: var(--green-dark);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .container { padding: 1rem; }
+            .player-list { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+            
+            header {
+                padding: env(safe-area-inset-top) 1rem 1rem;
+            }
+            
+            .logout-btn {
+                top: calc(env(safe-area-inset-top) + 1rem);
+                right: 1rem;
+                padding: 0.4rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            nav {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            
+            nav::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .nav-btn {
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 0.75rem 0.5rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .login-container {
+                margin: 50px 1rem;
+                padding: 2rem;
+            }
+        }
+
+        /* iOS Safe Area */
+        @supports (padding: max(0px)) {
+            body {
+                padding-bottom: max(0px, env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <h2>League Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="teamSelect">Select Your Team</label>
+                <select id="teamSelect" required>
+                    <option value="">-- Choose Team --</option>
+                    <option value="THE ARMY">THE ARMY</option>
+                    <option value="PETE/SWAN">PETE/SWAN</option>
+                    <option value="BOO/SMITTY">BOO/SMITTY</option>
+                    <option value="MASON/WRIGHT">MASON/WRIGHT</option>
+                    <option value="SLAYDEN">SLAYDEN</option>
+                    <option value="JR/EGAN">JR/EGAN</option>
+                    <option value="ZY">ZY</option>
+                    <option value="JC/WES">JC/WES</option>
+                    <option value="BILLY/STICK">BILLY/STICK</option>
+                    <option value="CARSON">CARSON</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="password">Team Password</label>
+                <input type="password" id="password" required placeholder="Enter team password">
+            </div>
+            <button type="submit">Enter League</button>
+        </form>
+    </div>
+
+    <!-- Main App -->
+    <div id="mainApp" class="hidden">
+        <header>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+            <div class="header-content">
+                <h1>Fantasy Golf League 2026</h1>
+                <div class="season-info">First Half: Through PGA Championship | Second Half: Through Tour Championship</div>
+            </div>
+        </header>
+
+        <div class="container">
+            <nav>
+                <button class="nav-btn active" onclick="showSection('standings')">Standings</button>
+                <button class="nav-btn" onclick="showSection('myTeam')">My Team</button>
+                <button class="nav-btn" onclick="showSection('playerPool')">Player Pool</button>
+                <button class="nav-btn" onclick="showSection('transactions')">Transactions</button>
+                <button class="nav-btn" onclick="showSection('rules')">Rules</button>
+            </nav>
+
+            <!-- Standings Section -->
+            <div id="standingsSection" class="section">
+                <div class="card">
+                    <h2>League Standings</h2>
+                    <table id="standingsTable">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Team</th>
+                                <th>Total Points</th>
+                                <th>1st Half</th>
+                                <th>2nd Half</th>
+                            </tr>
+                        </thead>
+                        <tbody id="standingsBody">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- My Team Section -->
+            <div id="myTeamSection" class="section hidden">
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Total Points</div>
+                        <div class="stat-value" id="teamTotalPoints">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Moves Remaining</div>
+                        <div class="stat-value" id="movesRemaining">5</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Current Rank</div>
+                        <div class="stat-value" id="currentRank">-</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>My Roster</h2>
+                    <div class="player-list" id="myRoster">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Player Pool Section -->
+            <div id="playerPoolSection" class="section hidden">
+                <div class="card">
+                    <h2>Available Players</h2>
+                    <div class="search-box">
+                        <input type="text" id="playerSearch" placeholder="Search players..." oninput="filterPlayers()">
+                    </div>
+                    <div class="player-pool" id="playerPoolList">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions Section -->
+            <div id="transactionsSection" class="section hidden">
+                <div class="card">
+                    <h2>Transaction History</h2>
+                    <div id="transactionsList">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rules Section -->
+            <div id="rulesSection" class="section hidden">
+                <div class="card">
+                    <h2>League Rules</h2>
+                    <h3 style="margin-top: 1.5rem;">Scoring System</h3>
+                    <ul style="line-height: 1.8; margin-left: 2rem;">
+                        <li><strong>1st Place:</strong> 10 points</li>
+                        <li><strong>2nd Place:</strong> 5 points</li>
+                        <li><strong>3rd Place:</strong> 4 points</li>
+                        <li><strong>4th Place:</strong> 3 points</li>
+                        <li><strong>5th Place:</strong> 2 points</li>
+                        <li><strong>6th-10th:</strong> 0 points</li>
+                    </ul>
+
+                    <h3 style="margin-top: 1.5rem;">Tournament Multipliers</h3>
+                    <ul style="line-height: 1.8; margin-left: 2rem;">
+                        <li><strong>Majors (3x):</strong> Masters, PGA Championship, U.S. Open, The Open Championship</li>
+                        <li><strong>The Players (2x)</strong></li>
+                        <li><strong>Elevated Events (1.5x):</strong> AT&T Pebble Beach, Genesis Invitational, Arnold Palmer, RBC Heritage, Cadillac Championship, Truist Championship</li>
+                    </ul>
+
+                    <h3 style="margin-top: 1.5rem;">Special Rules</h3>
+                    <ul style="line-height: 1.8; margin-left: 2rem;">
+                        <li><strong>Scottie Scheffler:</strong> All points are halved</li>
+                    </ul>
+
+                    <h3 style="margin-top: 1.5rem;">Roster Management</h3>
+                    <ul style="line-height: 1.8; margin-left: 2rem;">
+                        <li><strong>Drop/Add Limit:</strong> 5 per team per season ($10 fee each)</li>
+                        <li><strong>Trade Deadline:</strong> British Open</li>
+                        <li><strong>Roster Size:</strong> 8 players</li>
+                    </ul>
+
+                    <h3 style="margin-top: 1.5rem;">Prize Money ($4,000 Total)</h3>
+                    <ul style="line-height: 1.8; margin-left: 2rem;">
+                        <li>1st Half Winner: $550, Runner-up: $250</li>
+                        <li>2nd Half Winner: $550, Runner-up: $250</li>
+                        <li>Overall Winner: $1,300, Runner-up: $500</li>
+                        <li>Major Winner: $150 per major (4 majors)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/Fantasy-Golf/service-worker.js')
+                .then(reg => console.log('Service Worker registered'))
+                .catch(err => console.log('Service Worker registration failed'));
+        }
+
+        // iOS Install Prompt
+        let deferredPrompt;
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+
+        if (isIOS && !isStandalone) {
+            // Show iOS install instructions after 3 seconds
+            setTimeout(() => {
+                const installDiv = document.createElement('div');
+                installDiv.style.cssText = `
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background: var(--green-dark);
+                    color: var(--cream);
+                    padding: 1.5rem;
+                    text-align: center;
+                    z-index: 10000;
+                    box-shadow: 0 -4px 20px var(--shadow);
+                `;
+                installDiv.innerHTML = `
+                    <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; margin-bottom: 0.5rem;">
+                        Install App
+                    </div>
+                    <div style="font-size: 0.9rem; margin-bottom: 1rem;">
+                        Tap the Share button <span style="font-size: 1.2rem;">⬆️</span> and select "Add to Home Screen"
+                    </div>
+                    <button onclick="this.parentElement.remove()" style="padding: 0.5rem 2rem; background: var(--gold); color: var(--green-dark); border: none; border-radius: 6px; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 1px; cursor: pointer;">
+                        Got It
+                    </button>
+                `;
+                document.body.appendChild(installDiv);
+            }, 3000);
+        }
+
+        // League Data
+        const leagueData = {
+            teams: {
+                'THE ARMY': {
+                    players: ['Scottie Scheffler', 'Matt Fitzpatrick', 'Sahith Theegala', 'Maverick McNealy', 
+                              'Jon Rahm', 'Aldrich Potgieter', 'Nico Echavarria', 'Davis Riley'],
+                    points: 4,
+                    firstHalf: 4,
+                    secondHalf: 0,
+                    movesUsed: 0
+                },
+                'PETE/SWAN': {
+                    players: ['Rory McIlroy', 'Russell Henley', 'Harris English', 'Wyndham Clark',
+                              'Keegan Bradley', 'Keith Mitchell', 'Adam Scott', 'Aaron Rai'],
+                    points: 0,
+                    firstHalf: 0,
+                    secondHalf: 0,
+                    movesUsed: 0
+                },
+                'BOO/SMITTY': {
+                    players: ['Xander Schauffele', 'Sepp Straka', 'Patrick Cantlay', 'Andrew Novak',
+                              'Akshay Bhatia', 'Tom Hoge', 'Stephan Jaeger', 'Ryan Fox'],
+                    points: 4,
+                    firstHalf: 4,
+                    secondHalf: 0,
+                    movesUsed: 0
+                },
+                'MASON/WRIGHT': {
+                    players: ['Tommy Fleetwood', 'JJ Spaun', 'Colin Morikawa', 'Tyrell Hatton',
+                              'Sungjae Im', 'Taylor Pendrith', 'Johnny Keefer', 'Billy Horschel'],
+                    points: 0,
+                    firstHalf: 0,
+                    secondHalf: 0,
+                    movesUsed: 0
+                },
+                'SLAYDEN': {
+                    players: ['Justin Thomas', 'Cameron Young', 'Corey Conners', 'Jason Day',
+                              'Nick Taylor', 'Max Greyserman', 'Denny McCarthy', 'Thomas Detry'],
+                    points: 0,
+                    firstHalf: 0,
+                    secondHalf: 0,
+                    movesUsed: 0
+                },
+                'JR/EGAN': {
+                    players: ['Ludvig Aberg', 'Brooks Koepka', 'Tony Finau', 'Max Homa',
+                              'Will Zalatoris', 'Jordan Spieth', 'Eric Cole', 'Emiliano Grillo'],
+                    points: 0,
+                    firstHalf: 0,
+                    secondHalf: 0,
+                    movesUsed: 0
+                },
+                'ZY': {
+                    players: ['Chris Gotterup', 'Robert MacIntyre', 'Pierceson Coody', 'Alex Noren',
+                              'Michael Thorbjornsen', 'Nicolai Hojgaard', 'Rasmus Hojgaard', 'Jacob Bridgeman'],
+                    points: 18,
+                    firstHalf: 18,
+                    secondHalf: 0,
+                    movesUsed: 0
+                },
+                'JC/WES': {
+                    players: ['Justin Rose', 'Hideki Matsuyama', 'Ryan Gerard', 'Si Woo Kim',
+                              'Matt McCarty', 'Tom Kim', 'Kurt Kitayama', 'JT Poston'],
+                    points: 9,
+                    firstHalf: 9,
+                    secondHalf: 0,
+                    movesUsed: 0
+                },
+                'BILLY/STICK': {
+                    players: ['Ben Griffin', 'Bryson DeChambeau', 'Ryo Hisatsune', 'Min Woo Lee',
+                              'Brian Harman', 'Sam Stevens', 'Harry Hall', 'Zach Bauchou'],
+                    points: 0,
+                    firstHalf: 0,
+                    secondHalf: 0,
+                    movesUsed: 0
+                },
+                'CARSON': {
+                    players: ['Viktor Hovland', 'Sam Burns', 'Daniel Berger', 'Shane Lowry',
+                              'Jake Knapp', 'Nick Dunlap', 'Mackenzie Hughes', 'Alex Smalley'],
+                    points: 3,
+                    firstHalf: 3,
+                    secondHalf: 0,
+                    movesUsed: 0
+                }
+            },
+            transactions: [],
+            availablePlayers: [
+                'Rickie Fowler', 'Cameron Smith', 'Justin Lower', 'Patrick Reed',
+                'Billy Gotterup', 'Webb Simpson', 'Gary Woodland', 'Lucas Glover',
+                'Lee Hodges', 'Taylor Moore', 'Kevin Yu', 'Zac Blair'
+            ]
+        };
+
+        let currentTeam = null;
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const team = document.getElementById('teamSelect').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple password check (in production, use proper authentication)
+            if (password.length > 0) {
+                currentTeam = team;
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('mainApp').classList.remove('hidden');
+                loadDashboard();
+            } else {
+                alert('Please enter a password');
+            }
+        });
+
+        function logout() {
+            currentTeam = null;
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('mainApp').classList.add('hidden');
+            document.getElementById('password').value = '';
+        }
+
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+            // Remove active from all nav buttons
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(section + 'Section').classList.remove('hidden');
+            event.target.classList.add('active');
+            
+            // Load section-specific data
+            if (section === 'standings') loadStandings();
+            if (section === 'myTeam') loadMyTeam();
+            if (section === 'playerPool') loadPlayerPool();
+            if (section === 'transactions') loadTransactions();
+        }
+
+        function loadDashboard() {
+            loadStandings();
+            loadMyTeam();
+        }
+
+        function loadStandings() {
+            const tbody = document.getElementById('standingsBody');
+            tbody.innerHTML = '';
+            
+            // Sort teams by points
+            const sortedTeams = Object.entries(leagueData.teams)
+                .sort((a, b) => b[1].points - a[1].points);
+            
+            sortedTeams.forEach(([name, data], index) => {
+                const row = document.createElement('tr');
+                const rankClass = index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : '';
+                row.innerHTML = `
+                    <td class="${rankClass}">${index + 1}</td>
+                    <td><strong>${name}</strong></td>
+                    <td><strong>${data.points}</strong></td>
+                    <td>${data.firstHalf}</td>
+                    <td>${data.secondHalf}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function loadMyTeam() {
+            const teamData = leagueData.teams[currentTeam];
+            const roster = document.getElementById('myRoster');
+            roster.innerHTML = '';
+            
+            // Update stats
+            document.getElementById('teamTotalPoints').textContent = teamData.points;
+            document.getElementById('movesRemaining').textContent = 5 - teamData.movesUsed;
+            
+            // Calculate rank
+            const sortedTeams = Object.entries(leagueData.teams)
+                .sort((a, b) => b[1].points - a[1].points);
+            const rank = sortedTeams.findIndex(([name]) => name === currentTeam) + 1;
+            document.getElementById('currentRank').textContent = rank;
+            
+            // Display players
+            teamData.players.forEach(player => {
+                const card = document.createElement('div');
+                card.className = 'player-card';
+                if (teamData.movesUsed < 5) {
+                    card.className += ' droppable';
+                }
+                card.innerHTML = `
+                    <div class="player-name">${player}</div>
+                    <div class="player-points">0 pts</div>
+                    ${teamData.movesUsed < 5 ? `<button class="drop-btn" onclick="dropPlayer('${player}')">Drop Player</button>` : ''}
+                `;
+                roster.appendChild(card);
+            });
+        }
+
+        function loadPlayerPool() {
+            const poolList = document.getElementById('playerPoolList');
+            poolList.innerHTML = '';
+            
+            const teamData = leagueData.teams[currentTeam];
+            const canAdd = teamData.players.length < 8 && teamData.movesUsed < 5;
+            
+            leagueData.availablePlayers.forEach(player => {
+                const div = document.createElement('div');
+                div.className = 'pool-player';
+                div.innerHTML = `
+                    <div>
+                        <div class="player-name">${player}</div>
+                        <div style="font-size: 0.9rem; color: #666;">0 points this season</div>
+                    </div>
+                    <button class="add-btn" onclick="addPlayer('${player}')" ${!canAdd ? 'disabled' : ''}>
+                        Add to Roster
+                    </button>
+                `;
+                poolList.appendChild(div);
+            });
+        }
+
+        function filterPlayers() {
+            const search = document.getElementById('playerSearch').value.toLowerCase();
+            const players = document.querySelectorAll('.pool-player');
+            players.forEach(player => {
+                const name = player.querySelector('.player-name').textContent.toLowerCase();
+                player.style.display = name.includes(search) ? 'flex' : 'none';
+            });
+        }
+
+        function dropPlayer(playerName) {
+            const teamData = leagueData.teams[currentTeam];
+            
+            if (teamData.movesUsed >= 5) {
+                alert('You have used all 5 roster moves for the season.');
+                return;
+            }
+            
+            if (confirm(`Drop ${playerName}? This will use 1 of your ${5 - teamData.movesUsed} remaining moves and cost $10.`)) {
+                // Remove from roster
+                teamData.players = teamData.players.filter(p => p !== playerName);
+                
+                // Add to available players
+                leagueData.availablePlayers.push(playerName);
+                leagueData.availablePlayers.sort();
+                
+                // Record transaction
+                leagueData.transactions.unshift({
+                    team: currentTeam,
+                    action: 'DROP',
+                    player: playerName,
+                    date: new Date().toLocaleDateString()
+                });
+                
+                // Reload team view
+                loadMyTeam();
+                alert(`${playerName} has been dropped from your roster.`);
+            }
+        }
+
+        function addPlayer(playerName) {
+            const teamData = leagueData.teams[currentTeam];
+            
+            if (teamData.players.length >= 8) {
+                alert('Your roster is full. Drop a player first.');
+                return;
+            }
+            
+            if (teamData.movesUsed >= 5) {
+                alert('You have used all 5 roster moves for the season.');
+                return;
+            }
+            
+            if (confirm(`Add ${playerName}? This will use 1 of your ${5 - teamData.movesUsed} remaining moves and cost $10.`)) {
+                // Add to roster
+                teamData.players.push(playerName);
+                teamData.movesUsed++;
+                
+                // Remove from available players
+                leagueData.availablePlayers = leagueData.availablePlayers.filter(p => p !== playerName);
+                
+                // Record transaction
+                leagueData.transactions.unshift({
+                    team: currentTeam,
+                    action: 'ADD',
+                    player: playerName,
+                    date: new Date().toLocaleDateString()
+                });
+                
+                // Reload views
+                loadMyTeam();
+                loadPlayerPool();
+                alert(`${playerName} has been added to your roster!`);
+            }
+        }
+
+        function loadTransactions() {
+            const list = document.getElementById('transactionsList');
+            
+            if (leagueData.transactions.length === 0) {
+                list.innerHTML = '<p style="color: #666; text-align: center; padding: 2rem;">No transactions yet this season.</p>';
+                return;
+            }
+            
+            list.innerHTML = '';
+            leagueData.transactions.forEach(trans => {
+                const div = document.createElement('div');
+                div.className = 'transaction';
+                div.innerHTML = `
+                    <div class="transaction-date">${trans.date}</div>
+                    <div class="transaction-details">
+                        ${trans.team} ${trans.action === 'DROP' ? 'dropped' : 'added'} <strong>${trans.player}</strong>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+        }
+    </script>
+</body>
+</html>
