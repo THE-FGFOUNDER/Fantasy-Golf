@@ -48,7 +48,7 @@
             background: #ffffff !important;
             background-color: #ffffff !important;
             color: var(--black);
-            padding: 1.5rem 2rem;
+            padding: 2rem 2rem;
             border-bottom: 3px solid var(--masters-green);
             box-shadow: 0 2px 10px var(--shadow);
         }
@@ -58,12 +58,12 @@
             margin: 0 auto;
             display: flex;
             align-items: center;
-            gap: 2rem;
+            justify-content: center;
         }
 
         .header-logo {
-            width: 70px;
-            height: 70px;
+            width: 105px;
+            height: 105px;
         }
 
         h1 {
@@ -200,7 +200,7 @@
         /* Cards - Masters Style */
         .card {
             background: var(--white);
-            padding: 2rem;
+            padding: 0 2rem 2rem 2rem;
             border-radius: 0;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
@@ -221,7 +221,7 @@
             background: var(--masters-green);
             color: var(--white);
             border-radius: 0;
-            margin: -2rem -2rem 0 -2rem;
+            margin: 0;
         }
 
         table {
@@ -565,7 +565,6 @@
         <header>
             <div class="header-content">
                 <img src="/Fantasy-Golf/icon-192.png" alt="FG League" class="header-logo" onerror="this.style.display='none'">
-                <h1>2026</h1>
             </div>
         </header>
 
@@ -914,6 +913,19 @@
             const scoringContent = document.getElementById('scoringContent');
             scoringContent.innerHTML = '';
             
+            // Player points from WM Phoenix Open (halve Scottie's points)
+            const playerPoints = {
+                'Chris Gotterup': 10,
+                'Michael Thorbjornsen': 4,
+                'Nicolai Hojgaard': 4,
+                'Hideki Matsuyama': 5,
+                'Si Woo Kim': 4,
+                'Scottie Scheffler': 2,  // Halved from 4
+                'Matt Fitzpatrick': 2,
+                'Akshay Bhatia': 4,
+                'Jake Knapp': 3
+            };
+            
             // Create a table for each team showing their players and points
             Object.entries(leagueData.teams)
                 .sort((a, b) => b[1].points - a[1].points)
@@ -942,9 +954,10 @@
                         const playerDiv = document.createElement('div');
                         playerDiv.style.padding = '0.5rem';
                         playerDiv.style.borderBottom = '1px solid #ddd';
+                        const points = playerPoints[player] || 0;
                         playerDiv.innerHTML = `
                             <div style="font-weight: 500;">${player}</div>
-                            <div style="color: var(--gold); font-weight: bold;">0 pts</div>
+                            <div style="color: ${points > 0 ? 'var(--gold)' : '#666'}; font-weight: bold;">${points} pts</div>
                         `;
                         playerList.appendChild(playerDiv);
                     });
@@ -1026,6 +1039,9 @@
             }
             
             if (confirm(`Drop ${playerName}? This will use 1 of your ${5 - teamData.movesUsed} remaining moves and cost $10.`)) {
+                // Increment moves used
+                teamData.movesUsed++;
+                
                 // Remove from roster
                 teamData.players = teamData.players.filter(p => p !== playerName);
                 
@@ -1041,9 +1057,10 @@
                     date: new Date().toLocaleDateString()
                 });
                 
-                // Reload team view
-                loadMyTeam();
                 alert(`${playerName} has been dropped from your roster.`);
+                
+                // Automatically navigate to Available Players
+                showSection('playerPool');
             }
         }
 
