@@ -571,17 +571,18 @@
 
         <div class="container">
             <nav>
-                <button class="nav-btn active" onclick="showSection('standings')">Standings</button>
-                <button class="nav-btn" onclick="showSection('myTeam')">My Team</button>
-                <button class="nav-btn" onclick="showSection('playerPool')">Player Pool</button>
+                <button class="nav-btn active" onclick="showSection('leaderboard')">Leaderboard</button>
+                <button class="nav-btn" onclick="showSection('scoring')">Scoring</button>
+                <button class="nav-btn" onclick="showSection('myTeam')">Manage My Team</button>
+                <button class="nav-btn" onclick="showSection('playerPool')">Available Players</button>
                 <button class="nav-btn" onclick="showSection('transactions')">Transactions</button>
                 <button class="nav-btn" onclick="showSection('rules')">Rules</button>
             </nav>
 
-            <!-- Standings Section -->
-            <div id="standingsSection" class="section">
+            <!-- Leaderboard Section -->
+            <div id="leaderboardSection" class="section">
                 <div class="card">
-                    <h2>League Standings</h2>
+                    <h2>Leaderboard</h2>
                     <table id="standingsTable">
                         <thead>
                             <tr>
@@ -596,6 +597,16 @@
                             <!-- Populated by JavaScript -->
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            <!-- Scoring Section -->
+            <div id="scoringSection" class="section hidden">
+                <div class="card">
+                    <h2>Scoring</h2>
+                    <div id="scoringContent">
+                        <!-- Populated by JavaScript -->
+                    </div>
                 </div>
             </div>
 
@@ -865,7 +876,8 @@
             event.target.classList.add('active');
             
             // Load section-specific data
-            if (section === 'standings') loadStandings();
+            if (section === 'leaderboard') loadStandings();
+            if (section === 'scoring') loadScoring();
             if (section === 'myTeam') loadMyTeam();
             if (section === 'playerPool') loadPlayerPool();
             if (section === 'transactions') loadTransactions();
@@ -896,6 +908,50 @@
                 `;
                 tbody.appendChild(row);
             });
+        }
+
+        function loadScoring() {
+            const scoringContent = document.getElementById('scoringContent');
+            scoringContent.innerHTML = '';
+            
+            // Create a table for each team showing their players and points
+            Object.entries(leagueData.teams)
+                .sort((a, b) => b[1].points - a[1].points)
+                .forEach(([teamName, teamData]) => {
+                    const teamCard = document.createElement('div');
+                    teamCard.className = 'scoring-team-card';
+                    teamCard.style.marginBottom = '2rem';
+                    teamCard.style.border = '2px solid var(--masters-green)';
+                    teamCard.style.padding = '1.5rem';
+                    
+                    const teamHeader = document.createElement('h3');
+                    teamHeader.textContent = `${teamName} - ${teamData.points} points`;
+                    teamHeader.style.fontFamily = "'Liberation Serif', 'Georgia', serif";
+                    teamHeader.style.fontWeight = 'bold';
+                    teamHeader.style.color = 'var(--masters-green)';
+                    teamHeader.style.marginBottom = '1rem';
+                    teamHeader.style.fontSize = '1.5rem';
+                    teamCard.appendChild(teamHeader);
+                    
+                    const playerList = document.createElement('div');
+                    playerList.style.display = 'grid';
+                    playerList.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))';
+                    playerList.style.gap = '0.5rem';
+                    
+                    teamData.players.forEach(player => {
+                        const playerDiv = document.createElement('div');
+                        playerDiv.style.padding = '0.5rem';
+                        playerDiv.style.borderBottom = '1px solid #ddd';
+                        playerDiv.innerHTML = `
+                            <div style="font-weight: 500;">${player}</div>
+                            <div style="color: var(--gold); font-weight: bold;">0 pts</div>
+                        `;
+                        playerList.appendChild(playerDiv);
+                    });
+                    
+                    teamCard.appendChild(playerList);
+                    scoringContent.appendChild(teamCard);
+                });
         }
 
         function loadMyTeam() {
