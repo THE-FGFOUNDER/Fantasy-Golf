@@ -752,8 +752,8 @@
                 'THE ARMY': {
                     players: ['Scottie Scheffler', 'Matt Fitzpatrick', 'Sahith Theegala', 'Maverick McNealy', 
                               'Jon Rahm', 'Aldrich Potgieter', 'Nico Echavarria', 'Davis Riley'],
-                    points: 4,
-                    firstHalf: 4,
+                    points: 11,
+                    firstHalf: 11,
                     secondHalf: 0,
                     movesUsed: 0
                 },
@@ -768,16 +768,16 @@
                 'BOO/SMITTY': {
                     players: ['Xander Schauffele', 'Sepp Straka', 'Patrick Cantlay', 'Andrew Novak',
                               'Akshay Bhatia', 'Tom Hoge', 'Stephan Jaeger', 'Ryan Fox'],
-                    points: 4,
-                    firstHalf: 4,
+                    points: 20.5,
+                    firstHalf: 20.5,
                     secondHalf: 0,
                     movesUsed: 0
                 },
                 'MASON/WRIGHT': {
                     players: ['Tommy Fleetwood', 'JJ Spaun', 'Colin Morikawa', 'Tyrell Hatton',
                               'Sungjae Im', 'Taylor Pendrith', 'Johnny Keefer', 'Billy Horschel'],
-                    points: 0,
-                    firstHalf: 0,
+                    points: 21,
+                    firstHalf: 21,
                     secondHalf: 0,
                     movesUsed: 0
                 },
@@ -800,32 +800,32 @@
                 'ZY': {
                     players: ['Chris Gotterup', 'Robert MacIntyre', 'Pierceson Coody', 'Alex Noren',
                               'Michael Thorbjornsen', 'Nicolai Hojgaard', 'Rasmus Hojgaard', 'Jacob Bridgeman'],
-                    points: 18,
-                    firstHalf: 18,
+                    points: 20,
+                    firstHalf: 20,
                     secondHalf: 0,
                     movesUsed: 0
                 },
                 'JC/WES': {
                     players: ['Justin Rose', 'Hideki Matsuyama', 'Ryan Gerard', 'Si Woo Kim',
                               'Matt McCarty', 'Tom Kim', 'Kurt Kitayama', 'JT Poston'],
-                    points: 9,
-                    firstHalf: 9,
+                    points: 7.5,
+                    firstHalf: 7.5,
                     secondHalf: 0,
                     movesUsed: 0
                 },
                 'BILLY/STICK': {
                     players: ['Ben Griffin', 'Bryson DeChambeau', 'Ryo Hisatsune', 'Min Woo Lee',
                               'Brian Harman', 'Sam Stevens', 'Harry Hall', 'Zach Bauchou'],
-                    points: 0,
-                    firstHalf: 0,
+                    points: 10.5,
+                    firstHalf: 10.5,
                     secondHalf: 0,
                     movesUsed: 0
                 },
                 'CARSON': {
                     players: ['Viktor Hovland', 'Sam Burns', 'Daniel Berger', 'Shane Lowry',
                               'Jake Knapp', 'Nick Dunlap', 'Mackenzie Hughes', 'Alex Smalley'],
-                    points: 3,
-                    firstHalf: 3,
+                    points: 13.5,
+                    firstHalf: 13.5,
                     secondHalf: 0,
                     movesUsed: 0
                 }
@@ -913,17 +913,30 @@
             const scoringContent = document.getElementById('scoringContent');
             scoringContent.innerHTML = '';
             
-            // Player points from WM Phoenix Open (halve Scottie's points)
+            // Player points - cumulative season totals
+            // Scoring: Winner=10, 2nd=5, 3rd=4, 4th=3, 5th=2. Ties share same points.
+            // Multipliers applied before Scheffler halving.
             const playerPoints = {
-                'Chris Gotterup': 10,
-                'Michael Thorbjornsen': 4,
-                'Nicolai Hojgaard': 4,
-                'Hideki Matsuyama': 5,
-                'Si Woo Kim': 4,
-                'Scottie Scheffler': 2,  // Halved from 4
-                'Matt Fitzpatrick': 2,
-                'Akshay Bhatia': 4,
-                'Jake Knapp': 3
+                // WM Phoenix Open (1x)
+                'Chris Gotterup': 10,       // WM: -16 winner = 10
+                'Hideki Matsuyama': 8,      // WM: -16 2nd = 5, ATT: -18 5th = 3
+                'Michael Thorbjornsen': 4,  // WM: -15 3rd = 4
+                'Si Woo Kim': 4,            // WM: -15 3rd = 4
+                'Akshay Bhatia': 8.5,       // WM: -15 3rd = 4, ATT: -19 4th = 4.5
+                'Scottie Scheffler': 5,     // WM: -15 3rd = 4 -> halved = 2, ATT: -20 3rd = 6 -> halved = 3
+                'Nicolai Hojgaard': 4,      // WM: -15 3rd = 4
+                'Jake Knapp': 6,            // WM: -14 4th = 3, ATT: -18 5th = 3
+                'Matt Fitzpatrick': 2,      // WM: -13 5th = 2
+                // AT&T Pebble Beach (1.5x)
+                'Colin Morikawa': 15,       // ATT: -22 winner = 10*1.5 = 15
+                'Min Woo Lee': 7.5,         // ATT: -21 2nd = 5*1.5 = 7.5
+                'Sepp Straka': 7.5,         // ATT: -21 2nd = 5*1.5 = 7.5
+                'Tommy Fleetwood': 6,       // ATT: -20 3rd = 4*1.5 = 6
+                'Sam Burns': 4.5,           // ATT: -19 4th = 3*1.5 = 4.5
+                'Jacob Bridgeman': 3,       // ATT: -18 5th = 2*1.5 = 3
+                'Nico Echavarria': 3,       // ATT: -18 5th = 2*1.5 = 3
+                'Ryo Hisatsune': 3,         // ATT: -18 5th = 2*1.5 = 3
+                'Shane Lowry': 3            // ATT: -18 5th = 2*1.5 = 3
             };
             
             // Create a table for each team showing their players and points

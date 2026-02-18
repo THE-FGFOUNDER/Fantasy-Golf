@@ -1,0 +1,179 @@
+FANTASY GOLF LEAGUE 2026 - MASTER TRACKING FILE
+================================================
+Last Updated: February 17, 2026 (After AT&T Pebble Beach)
+
+SCORING METHODOLOGY
+===================
+Points go to the 5 LOWEST SCORES in the field:
+  Winner (lowest score) = 10 pts
+  2nd lowest score      = 5 pts (all ties get 5)
+  3rd lowest score      = 4 pts (all ties get 4)
+  4th lowest score      = 3 pts (all ties get 3)
+  5th lowest score      = 2 pts (all ties get 2)
+Multipliers: Standard=1x | Elevated/Signature=1.5x | The Players=2x | Majors=3x
+Scottie Scheffler rule: Points always halved (after multiplier applied)
+
+SEASON STRUCTURE
+================
+First Half: Through PGA Championship | Second Half: Through Tour Championship
+Moves: 5 per team ($10 each) | Trade Deadline: British Open
+
+CURRENT STANDINGS
+=================
+1. MASON/WRIGHT  - 21 pts
+2. BOO/SMITTY    - 20.5 pts
+3. ZY            - 20 pts
+4. CARSON        - 13.5 pts
+5. JC/WES        - 12 pts
+6. THE ARMY      - 11 pts
+7. BILLY/STICK   - 10.5 pts
+8. PETE/SWAN     - 0 pts
+8. SLAYDEN       - 0 pts
+8. JR/EGAN       - 0 pts
+
+TEAM ROSTERS & SCORING DETAIL
+==============================
+
+THE ARMY - 11 pts | Moves: 0/5
+  Scottie Scheffler    WM:2(halved)  ATT:3(halved)  Total: 5
+  Matt Fitzpatrick     WM:2                          Total: 2
+  Nico Echavarria      ATT:3                         Total: 3
+  Sahith Theegala      0
+  Maverick McNealy     0
+  Jon Rahm             0
+  Aldrich Potgieter    0
+  Davis Riley          0
+
+PETE/SWAN - 0 pts | Moves: 0/5
+  Rory McIlroy         0
+  Russell Henley       0
+  Harris English       0
+  Wyndham Clark        0
+  Keegan Bradley       0
+  Keith Mitchell       0
+  Adam Scott           0
+  Aaron Rai            0
+
+BOO/SMITTY - 20.5 pts | Moves: 0/5
+  Akshay Bhatia        WM:4  ATT:4.5  Total: 8.5
+  Sepp Straka          ATT:7.5        Total: 7.5
+  Xander Schauffele    0
+  Patrick Cantlay      0
+  Andrew Novak         0
+  Tom Hoge             0
+  Stephan Jaeger       0
+  Ryan Fox             0
+
+MASON/WRIGHT - 21 pts | Moves: 0/5
+  Colin Morikawa       ATT:15         Total: 15
+  Tommy Fleetwood      ATT:6          Total: 6
+  JJ Spaun             0
+  Tyrell Hatton        0
+  Sungjae Im           0
+  Taylor Pendrith      0
+  Johnny Keefer        0
+  Billy Horschel       0
+
+SLAYDEN - 0 pts | Moves: 0/5
+  Justin Thomas        0
+  Cameron Young        0
+  Corey Conners        0
+  Jason Day            0
+  Nick Taylor          0
+  Max Greyserman       0
+  Denny McCarthy       0
+  Thomas Detry         0
+
+JR/EGAN - 0 pts | Moves: 0/5
+  Ludvig Aberg         0
+  Brooks Koepka        0
+  Tony Finau           0
+  Max Homa             0
+  Will Zalatoris       0
+  Jordan Spieth        0
+  Eric Cole            0
+  Emiliano Grillo      0
+
+ZY - 20 pts | Moves: 0/5
+  Chris Gotterup       WM:10          Total: 10
+  Michael Thorbjornsen WM:4           Total: 4
+  Nicolai Hojgaard     WM:4           Total: 4
+  Jacob Bridgeman      ATT:3          Total: 3
+  Robert MacIntyre     0
+  Pierceson Coody      0
+  Alex Noren           0
+  Rasmus Hojgaard      0
+
+JC/WES - 12 pts | Moves: 0/5
+  Hideki Matsuyama     WM:5  ATT:3    Total: 8
+  Si Woo Kim           WM:4           Total: 4
+  Justin Rose          0
+  Ryan Gerard          0
+  Matt McCarty         0
+  Tom Kim              0
+  Kurt Kitayama        0
+  JT Poston            0
+
+BILLY/STICK - 10.5 pts | Moves: 0/5
+  Min Woo Lee          ATT:7.5        Total: 7.5
+  Ryo Hisatsune        ATT:3          Total: 3
+  Ben Griffin          0
+  Bryson DeChambeau    0
+  Brian Harman         0
+  Sam Stevens          0
+  Harry Hall           0
+  Zach Bauchou         0
+
+CARSON - 13.5 pts | Moves: 0/5
+  Jake Knapp           WM:3  ATT:3    Total: 6
+  Sam Burns            ATT:4.5        Total: 4.5
+  Shane Lowry          ATT:3          Total: 3
+  Viktor Hovland       0
+  Adam Hadwin          0
+  Nick Dunlap          0
+  Cameron Smith        0
+  Luke Clanton         0
+  Mackenzie Hughes     0
+
+TRANSACTION HISTORY
+===================
+(No transactions yet)
+
+TOURNAMENT SCORING RECORD
+==========================
+
+WM Phoenix Open - Feb 5-8, 2026 (Standard 1x)
+-----------------------------------------------
+  -16 = Winner:    Chris Gotterup (ZY) = 10 pts
+  -16 = 2nd:       Hideki Matsuyama (JC/WES) = 5 pts  [lost playoff]
+  -15 = 3rd (tie): Si Woo Kim (JC/WES) = 4 pts
+  -15 = 3rd (tie): Michael Thorbjornsen (ZY) = 4 pts
+  -15 = 3rd (tie): Akshay Bhatia (BOO/SMITTY) = 4 pts
+  -15 = 3rd (tie): Scottie Scheffler (THE ARMY) = 4 pts -> HALVED = 2 pts
+  -15 = 3rd (tie): Nicolai Hojgaard (ZY) = 4 pts
+  -14 = 4th:       Jake Knapp (CARSON) = 3 pts
+  -13 = 5th:       Matt Fitzpatrick (THE ARMY) = 2 pts
+
+AT&T Pebble Beach - Feb 12-15, 2026 (Signature Event 1.5x)
+------------------------------------------------------------
+  -22 = Winner:    Colin Morikawa (MASON/WRIGHT) = 10x1.5 = 15 pts
+  -21 = 2nd (tie): Min Woo Lee (BILLY/STICK) = 5x1.5 = 7.5 pts
+  -21 = 2nd (tie): Sepp Straka (BOO/SMITTY) = 5x1.5 = 7.5 pts
+  -20 = 3rd (tie): Tommy Fleetwood (MASON/WRIGHT) = 4x1.5 = 6 pts
+  -20 = 3rd (tie): Scottie Scheffler (THE ARMY) = 4x1.5 = 6 pts -> HALVED = 3 pts
+  -19 = 4th (tie): Sam Burns (CARSON) = 3x1.5 = 4.5 pts
+  -19 = 4th (tie): Akshay Bhatia (BOO/SMITTY) = 3x1.5 = 4.5 pts
+  -18 = 5th (tie): Hideki Matsuyama (JC/WES) = 2x1.5 = 3 pts
+  -18 = 5th (tie): Nico Echavarria (THE ARMY) = 2x1.5 = 3 pts
+  -18 = 5th (tie): Jake Knapp (CARSON) = 2x1.5 = 3 pts
+  -18 = 5th (tie): Jacob Bridgeman (ZY) = 2x1.5 = 3 pts
+  -18 = 5th (tie): Ryo Hisatsune (BILLY/STICK) = 2x1.5 = 3 pts
+  -18 = 5th (tie): Shane Lowry (CARSON) = 2x1.5 = 3 pts
+
+UPCOMING TOURNAMENTS
+====================
+Genesis Invitational (1.5x)   - Feb 20-23, 2026
+Cognizant Classic (1x)        - Feb 27-Mar 2, 2026
+Arnold Palmer Inv. (1.5x)     - Mar 6-9, 2026
+THE PLAYERS Championship (2x) - Mar 13-16, 2026
+Valspar Championship (1x)     - Mar 20-23, 2026
