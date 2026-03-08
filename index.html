@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#165634">
+  <title>Fantasy Golf 2026</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: Candara, 'Segoe UI', sans-serif;
+      background-color: #165634;
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+    
+    /* Header */
+    .header {
+      background-color: #FFFFFF;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 2px solid #C9A961;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header img {
+      height: 70px;
+      width: auto;
+    }
+    
+    /* Title Bar */
+    .title-bar {
+      background-color: #0D3D1F;
+      padding: 10px 16px;
+      text-align: center;
+    }
+    .title-bar span {
+      color: #FFFFFF;
+      font-size: 16px;
+      font-weight: normal;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    
+    /* Column Headers */
+    .column-headers {
+      background-color: #165634;
+      display: flex;
+      padding: 8px 12px;
+      border-bottom: 1px solid #C9A961;
+    }
+    .column-headers span {
+      color: #C9A961;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    
+    /* Content Area */
+    .content {
+      background-color: #FFFFFF;
+      min-height: calc(100vh - 200px);
+    }
+    
+    /* Leaderboard Styles */
+    .leaderboard-row {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      border-bottom: 1px solid #E8E6DD;
+    }
+    .leaderboard-row:nth-child(odd) { background-color: #FFFEF9; }
+    .leaderboard-row:nth-child(even) { background-color: #F7F6F0; }
+    .leaderboard-row .pos { width: 12%; color: #165634; font-size: 14px; }
+    .leaderboard-row .team { width: 43%; color: #165634; font-size: 14px; font-weight: 500; }
+    .leaderboard-row .half1 { width: 15%; color: #165634; font-size: 14px; text-align: center; }
+    .leaderboard-row .half2 { width: 15%; color: #165634; font-size: 14px; text-align: center; }
+    .leaderboard-row .total { width: 15%; color: #165634; font-size: 14px; text-align: center; font-weight: bold; }
+    
+    /* Teams Styles */
+    .team-row {
+      display: flex;
+      align-items: center;
+      padding: 14px 12px;
+      border-bottom: 1px solid #E8E6DD;
+      cursor: pointer;
+    }
+    .team-row:nth-child(odd) { background-color: #FFFEF9; }
+    .team-row:nth-child(even) { background-color: #F7F6F0; }
+    .team-row .indicator { width: 8%; color: #165634; font-size: 12px; }
+    .team-row .name { width: 62%; color: #165634; font-size: 15px; }
+    .team-row .points { width: 30%; color: #165634; font-size: 15px; text-align: right; }
+    
+    .player-row {
+      display: flex;
+      align-items: center;
+      padding: 10px 12px 10px 32px;
+      border-bottom: 1px solid #E8E6DD;
+      background-color: #F0EFE9;
+    }
+    .player-row .name { width: 70%; color: #165634; font-size: 13px; }
+    .player-row .points { width: 30%; color: #165634; font-size: 13px; text-align: right; }
+    
+    /* Search Styles */
+    .search-container {
+      padding: 16px;
+      background-color: #FFFEF9;
+    }
+    .search-input {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 16px;
+      font-family: Candara, sans-serif;
+      border: 2px solid #C9A961;
+      border-radius: 8px;
+      outline: none;
+      background-color: #FFFFFF;
+    }
+    .search-input:focus {
+      border-color: #165634;
+    }
+    .search-result {
+      display: flex;
+      padding: 12px;
+      border-bottom: 1px solid #E8E6DD;
+    }
+    .search-result:nth-child(odd) { background-color: #FFFEF9; }
+    .search-result:nth-child(even) { background-color: #F7F6F0; }
+    .search-result .player { width: 50%; color: #165634; font-size: 14px; }
+    .search-result .team { width: 35%; color: #165634; font-size: 14px; }
+    .search-result .pts { width: 15%; color: #165634; font-size: 14px; text-align: right; }
+    .no-results {
+      padding: 20px;
+      text-align: center;
+      color: #165634;
+      font-size: 14px;
+    }
+    
+    /* By-Laws Styles */
+    .bylaw-header {
+      display: flex;
+      align-items: center;
+      padding: 14px 12px;
+      border-bottom: 1px solid #E8E6DD;
+      cursor: pointer;
+    }
+    .bylaw-header:nth-child(odd) { background-color: #FFFEF9; }
+    .bylaw-header:nth-child(even) { background-color: #F7F6F0; }
+    .bylaw-header span {
+      color: #165634;
+      font-size: 15px;
+    }
+    .bylaw-content {
+      padding: 16px 12px 16px 28px;
+      background-color: #F0EFE9;
+      border-bottom: 1px solid #E8E6DD;
+      display: none;
+    }
+    .bylaw-content.open { display: block; }
+    .bylaw-content p {
+      color: #165634;
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+    
+    /* Footer */
+    .footer {
+      background-color: #165634;
+      padding: 12px 16px;
+      text-align: center;
+      border-top: 2px solid #C9A961;
+    }
+    .footer span {
+      color: #C9A961;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+    
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #0D3D1F;
+      display: flex;
+      border-top: 2px solid #C9A961;
+      z-index: 100;
+    }
+    .nav-item {
+      flex: 1;
+      padding: 10px 4px;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: #C9A961;
+      font-family: Candara, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+    .nav-item.active {
+      background-color: #165634;
+      color: #FFFFFF;
+    }
+    .nav-icon {
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
+    
+    /* Section visibility */
+    .section { display: none; }
+    .section.active { display: block; }
+    
+    /* Hidden class */
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <!-- Header with Logo -->
+  <div class="header">
+    <img src="icon-512.png" alt="Fantasy Golf" id="logo">
+  </div>
+  
+  <!-- LEADERBOARD SECTION -->
+  <div id="leaderboard-section" class="section active">
+    <div class="title-bar"><span>Leaderboard</span></div>
+    <div class="column-headers">
+      <span style="width:12%">POS</span>
+      <span style="width:43%">TEAM</span>
+      <span style="width:15%;text-align:center">1ST</span>
+      <span style="width:15%;text-align:center">2ND</span>
+      <span style="width:15%;text-align:center">TOTAL</span>
+    </div>
+    <div class="content" id="leaderboard-content"></div>
+    <div class="footer"><span>4 OF 18 TOURNAMENTS COMPLETE</span></div>
+  </div>
+  
+  <!-- TEAMS SECTION -->
+  <div id="teams-section" class="section">
+    <div class="title-bar"><span>Teams</span></div>
+    <div class="column-headers">
+      <span style="width:8%"></span>
+      <span style="width:62%">TEAM</span>
+      <span style="width:30%;text-align:right">POINTS</span>
+    </div>
+    <div class="content" id="teams-content"></div>
+    <div class="footer"><span>TAP TEAM TO VIEW ROSTER</span></div>
+  </div>
+  
+  <!-- SEARCH SECTION -->
+  <div id="search-section" class="section">
+    <div class="title-bar"><span>Player Search</span></div>
+    <div class="content">
+      <div class="search-container">
+        <input type="text" class="search-input" id="search-input" placeholder="Enter player name...">
+      </div>
+      <div id="search-results"></div>
+    </div>
+    <div class="footer"><span>SEARCH ALL 80 PLAYERS</span></div>
+  </div>
+  
+  <!-- BY-LAWS SECTION -->
+  <div id="bylaws-section" class="section">
+    <div class="title-bar"><span>By-Laws</span></div>
+    <div class="content" id="bylaws-content"></div>
+    <div class="footer"><span>UPDATED 2026</span></div>
+  </div>
+  
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <button class="nav-item active" onclick="showSection('leaderboard')">
+      <div class="nav-icon">📊</div>
+      <div>Leaderboard</div>
+    </button>
+    <button class="nav-item" onclick="showSection('teams')">
+      <div class="nav-icon">👥</div>
+      <div>Teams</div>
+    </button>
+    <button class="nav-item" onclick="showSection('search')">
+      <div class="nav-icon">🔍</div>
+      <div>Search</div>
+    </button>
+    <button class="nav-item" onclick="showSection('bylaws')">
+      <div class="nav-icon">📋</div>
+      <div>By-Laws</div>
+    </button>
+  </div>
+
+  <script>
+    // TEAMS DATA
+    const teamsData = [
+      {
+        team: "ZY",
+        half1: 36, half2: 0, total: 36,
+        players: [
+          { name: "Chris Gotterup", points: 10 },
+          { name: "Robert MacIntyre", points: 0 },
+          { name: "Pierceson Coody", points: 0 },
+          { name: "Alex Noren", points: 0 },
+          { name: "Michael Thorbjornsen", points: 4 },
+          { name: "Nicolai Hojgaard", points: 4 },
+          { name: "Rasmus Hojgaard", points: 0 },
+          { name: "Jacob Bridgeman", points: 18 }
+        ]
+      },
+      {
+        team: "THE ARMY",
+        half1: 24.5, half2: 0, total: 24.5,
+        players: [
+          { name: "Scottie Scheffler", points: 5 },
+          { name: "Matt Fitzpatrick", points: 2 },
+          { name: "Sahith Theegala", points: 0 },
+          { name: "Maverick McNealy", points: 0 },
+          { name: "Jon Rahm", points: 0 },
+          { name: "Aldrich Potgieter", points: 4.5 },
+          { name: "Nico Echavarria", points: 13 },
+          { name: "Davis Riley", points: 0 }
+        ]
+      },
+      {
+        team: "CARSON",
+        half1: 21.5, half2: 0, total: 21.5,
+        players: [
+          { name: "Viktor Hovland", points: 0 },
+          { name: "Sam Burns", points: 4.5 },
+          { name: "Daniel Berger", points: 0 },
+          { name: "Shane Lowry", points: 8 },
+          { name: "Jake Knapp", points: 9 },
+          { name: "Taylor Moore", points: 0 },
+          { name: "Mackenzie Hughes", points: 0 },
+          { name: "Alex Smalley", points: 0 }
+        ]
+      },
+      {
+        team: "MASON/WRIGHT",
+        half1: 21, half2: 0, total: 21,
+        players: [
+          { name: "Tommy Fleetwood", points: 6 },
+          { name: "JJ Spaun", points: 0 },
+          { name: "Colin Morikawa", points: 15 },
+          { name: "Tyrell Hatton", points: 0 },
+          { name: "Sungjae Im", points: 0 },
+          { name: "Taylor Pendrith", points: 0 },
+          { name: "Johnny Keefer", points: 0 },
+          { name: "Billy Horschel", points: 0 }
+        ]
+      },
+      {
+        team: "JC/WES",
+        half1: 19.5, half2: 0, total: 19.5,
+        players: [
+          { name: "Justin Rose", points: 0 },
+          { name: "Hideki Matsuyama", points: 8 },
+          { name: "Ryan Gerard", points: 0 },
+          { name: "Si Woo Kim", points: 4 },
+          { name: "Matt McCarty", points: 0 },
+          { name: "Tom Kim", points: 0 },
+          { name: "Kurt Kitayama", points: 7.5 },
+          { name: "Marco Penge", points: 0 }
+        ]
+      },
+      {
+        team: "PETE/SWAN",
+        half1: 16.5, half2: 0, total: 16.5,
+        players: [
+          { name: "Rory McIlroy", points: 7.5 },
+          { name: "Russell Henley", points: 0 },
+          { name: "Harris English", points: 0 },
+          { name: "Wyndham Clark", points: 0 },
+          { name: "Keegan Bradley", points: 0 },
+          { name: "Keith Mitchell", points: 3 },
+          { name: "Adam Scott", points: 6 },
+          { name: "Aaron Rai", points: 0 }
+        ]
+      },
+      {
+        team: "BOO/SMITTY",
+        half1: 16, half2: 0, total: 16,
+        players: [
+          { name: "Xander Schauffele", points: 0 },
+          { name: "Sepp Straka", points: 7.5 },
+          { name: "Patrick Cantlay", points: 0 },
+          { name: "Andrew Novak", points: 0 },
+          { name: "Akshay Bhatia", points: 8.5 },
+          { name: "Tom Hoge", points: 0 },
+          { name: "Stephan Jaeger", points: 0 },
+          { name: "Ryan Fox", points: 0 }
+        ]
+      },
+      {
+        team: "BILLY/STICK",
+        half1: 10.5, half2: 0, total: 10.5,
+        players: [
+          { name: "Ben Griffin", points: 0 },
+          { name: "Bryson DeChambeau", points: 0 },
+          { name: "Ryo Hisatsune", points: 3 },
+          { name: "Min Woo Lee", points: 7.5 },
+          { name: "Brian Harman", points: 0 },
+          { name: "Sam Stevens", points: 0 },
+          { name: "Harry Hall", points: 0 },
+          { name: "Sami Valimaki", points: 0 }
+        ]
+      },
+      {
+        team: "JR/EGAN",
+        half1: 2, half2: 0, total: 2,
+        players: [
+          { name: "Ludvig Aberg", points: 0 },
+          { name: "Brooks Koepka", points: 2 },
+          { name: "Tony Finau", points: 0 },
+          { name: "Max Homa", points: 0 },
+          { name: "Will Zalatoris", points: 0 },
+          { name: "Jordan Spieth", points: 0 },
+          { name: "Eric Cole", points: 0 },
+          { name: "Ricky Fowler", points: 0 }
+        ]
+      },
+      {
+        team: "SLAYDEN",
+        half1: 0, half2: 0, total: 0,
+        players: [
+          { name: "Justin Thomas", points: 0 },
+          { name: "Cameron Young", points: 0 },
+          { name: "Corey Conners", points: 0 },
+          { name: "Jason Day", points: 0 },
+          { name: "Nick Taylor", points: 0 },
+          { name: "Max Greyserman", points: 0 },
+          { name: "Denny McCarthy", points: 0 },
+          { name: "Thomas Detry", points: 0 }
+        ]
+      }
+    ];
+
+    // BY-LAWS DATA
+    const bylawsData = [
+      {
+        title: "1. Owners",
+        content: "There are ten owners: Andrew Abernathy, Carson Allen, John Carroll, John Egan, Jimmy Haverstick, Kent Mason, Todd Moran, Swan Nicolson, Steve Slayden, Steve Zamojski. Partners are welcome but there is one vote per team."
+      },
+      {
+        title: "2. The Draft",
+        content: "Owners will draft 8 players to complete their team. A drawing will determine the order in which owner's choose their draft position. A team with neither owner or partner at the Draft will get the last available position. The draft order will reverse with each round."
+      },
+      {
+        title: "3. The Season",
+        content: "The start of the season will be determined by the commissioner. The first half will conclude with The PGA Championship. The second half will conclude with The Tour Championship."
+      },
+      {
+        title: "4. Scoring",
+        content: "4.1 For each tournament, players will score points based on the following:\n\n• 1st: 10 points\n• 2nd and ties: 5 points\n• 3rd and ties: 4 points\n• 4th and ties: 3 points\n• 5th and ties: 2 points\n\n4.2 Any points earned by Scottie Scheffler will be multiplied by 0.5.\n\n4.3 Points earned in the following tournaments will be multiplied by 1.5: The AT&T Pebble Beach Pro-Am, The Genesis Invitational, Arnold Palmer Invitational, RBC Heritage, Truist Championship, The Memorial Tournament, Travelers Championship.\n\n4.4 Points earned in the following tournaments will be multiplied by 2: The Players Championship, The Tour Championship.\n\n4.5 Points earned in the following tournaments \"The Majors\" will be multiplied by 3: The Masters, The PGA Championship, The US Open, The British Open.\n\n4.6 Points will be accumulated by team to determine team position for first half, second half and overall."
+      },
+      {
+        title: "5. Trades and Drops",
+        content: "5.1 Trades can be conducted up until the start of the British Open when a trade deadline will take effect. Trades are not subject to commissioner approval. The commissioner must be informed of a trade prior to the start of a tournament for the trade to be in effect during that tournament.\n\n5.2 An owner can drop a player and pick up an unassigned player at any point during the season. There is a maximum of 5 drop/adds per season for each owner. Drop/Adds must be communicated by E-mail or WhatsApp to be official."
+      },
+      {
+        title: "6. Money",
+        content: "6.1 Each owner will be responsible for $400/year for a total pot of $4000. The money will be distributed as follows:\n\n• 1st Half Winner: $550\n• 1st Half Runner-Up: $250\n• 2nd Half Winner: $550\n• 2nd Half Runner-Up: $250\n• Overall Winner: $1300\n• Overall Runner-Up: $500\n• Major Winner: $150/Major"
+      },
+      {
+        title: "7. Commissioner Responsibilities",
+        content: "7.1 Whoever wins the league is the Commissioner for the next year. The Commissioner agrees to:\n\n• Set the date and plan the Draft trip.\n• Manage the Draft.\n• Keep score for the league and communicate scores at least every other week.\n• Provide final scores and payments within one week of The Tour Championship."
+      },
+      {
+        title: "8. The Last Night",
+        content: "On the Last Night of FG Draft Weekend, the team that finishes last will be responsible for providing a quality meal for all participants."
+      },
+      {
+        title: "9. By-Laws",
+        content: "Any owner may propose a change to these by-laws and all owners will vote on the proposed change at the draft. Once the by-laws go into effect, any owner can change the by-laws by proposing a change via e-mail to all owners. A majority yes vote will change the by-laws."
+      }
+    ];
+
+    // Format points
+    function formatPts(val) {
+      if (val === 0) return "0";
+      return Number.isInteger(val) ? val.toString() : val.toFixed(1);
+    }
+
+    // Render Leaderboard
+    function renderLeaderboard() {
+      const container = document.getElementById('leaderboard-content');
+      const sorted = [...teamsData].sort((a, b) => b.total - a.total);
+      container.innerHTML = sorted.map((t, i) => `
+        <div class="leaderboard-row">
+          <span class="pos">${i + 1}</span>
+          <span class="team">${t.team}</span>
+          <span class="half1">${formatPts(t.half1)}</span>
+          <span class="half2">${formatPts(t.half2)}</span>
+          <span class="total">${formatPts(t.total)}</span>
+        </div>
+      `).join('');
+    }
+
+    // Render Teams
+    let expandedTeam = null;
+    function renderTeams() {
+      const container = document.getElementById('teams-content');
+      const sorted = [...teamsData].sort((a, b) => b.total - a.total);
+      let html = '';
+      sorted.forEach(t => {
+        const isExpanded = expandedTeam === t.team;
+        html += `
+          <div class="team-row" onclick="toggleTeam('${t.team}')">
+            <span class="indicator">${isExpanded ? '▼' : '▶'}</span>
+            <span class="name">${t.team}</span>
+            <span class="points">${formatPts(t.total)}</span>
+          </div>
+        `;
+        if (isExpanded) {
+          t.players.forEach(p => {
+            html += `
+              <div class="player-row">
+                <span class="name">${p.name}</span>
+                <span class="points">${formatPts(p.points)}</span>
+              </div>
+            `;
+          });
+        }
+      });
+      container.innerHTML = html;
+    }
+
+    function toggleTeam(teamName) {
+      expandedTeam = expandedTeam === teamName ? null : teamName;
+      renderTeams();
+    }
+
+    // Search functionality
+    function getAllPlayers() {
+      const players = [];
+      teamsData.forEach(t => {
+        t.players.forEach(p => {
+          players.push({ name: p.name, team: t.team, points: p.points });
+        });
+      });
+      return players;
+    }
+
+    function renderSearch(query) {
+      const container = document.getElementById('search-results');
+      if (!query || query.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+      const players = getAllPlayers();
+      const matches = players.filter(p => 
+        p.name.toLowerCase().includes(query.toLowerCase())
+      );
+      if (matches.length === 0) {
+        container.innerHTML = '<div class="no-results">No players found</div>';
+        return;
+      }
+      container.innerHTML = matches.map(p => `
+        <div class="search-result">
+          <span class="player">${p.name}</span>
+          <span class="team">${p.team}</span>
+          <span class="pts">${formatPts(p.points)}</span>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      renderSearch(e.target.value);
+    });
+
+    // Render By-Laws
+    let expandedBylaw = null;
+    function renderBylaws() {
+      const container = document.getElementById('bylaws-content');
+      let html = '';
+      bylawsData.forEach((b, i) => {
+        const isExpanded = expandedBylaw === i;
+        html += `
+          <div class="bylaw-header" onclick="toggleBylaw(${i})">
+            <span>${isExpanded ? '▼' : '▶'} ${b.title}</span>
+          </div>
+        `;
+        html += `<div class="bylaw-content ${isExpanded ? 'open' : ''}"><p>${b.content}</p></div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function toggleBylaw(index) {
+      expandedBylaw = expandedBylaw === index ? null : index;
+      renderBylaws();
+    }
+
+    // Section Navigation
+    function showSection(name) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      document.getElementById(name + '-section').classList.add('active');
+      event.target.closest('.nav-item').classList.add('active');
+    }
+
+    // Initialize
+    renderLeaderboard();
+    renderTeams();
+    renderBylaws();
+  </script>
+</body>
+</html>
