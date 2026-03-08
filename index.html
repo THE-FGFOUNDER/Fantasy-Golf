@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FG League">
+    <meta name="theme-color" content="#0d3b2e">
+    <title>Fantasy Golf League 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --masters-green: #00441b;
+            --black: #000000;
+            --white: #ffffff;
+            --gold: #d4af37;
+            --shadow: rgba(0, 0, 0, 0.15);
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            background: var(--white);
+            color: var(--black);
+            min-height: 100vh;
+            padding: 0;
+            overscroll-behavior: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header */
+        header {
+            background: #ffffff !important;
+            background-color: #ffffff !important;
+            color: var(--black);
+            padding: 2rem 2rem;
+            border-bottom: 3px solid var(--masters-green);
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-logo {
+            width: 120px;
+            height: 120px;
+        }
+
+        h1 {
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-size: 4rem;
+            font-weight: bold;
+            letter-spacing: 12px;
+            margin: 0;
+            color: var(--gold);
+        }
+
+        /* Loading Screen */
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e0e0e0;
+            border-top-color: var(--masters-green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Login Screen */
+        .login-container {
+            max-width: 500px;
+            margin: 100px auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px var(--shadow);
+            border: 2px solid var(--masters-green);
+        }
+
+        .login-container h2 {
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
+            font-size: 2.5rem;
+            color: var(--masters-green);
+            margin-bottom: 2rem;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--masters-green);
+        }
+
+        select, input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--masters-green);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
+            background: var(--white);
+            color: var(--masters-green);
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--masters-green);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: var(--masters-green);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        /* Login button - gold */
+        .login-container button {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .login-container button:hover {
+            background: var(--gold);
+            opacity: 0.9;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px var(--shadow);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--white);
+            border: 2px solid var(--masters-green);
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            color: var(--masters-green);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--masters-green);
+            color: var(--white);
+            border-color: var(--masters-green);
+        }
+
+        /* Cards - Masters Style */
+        .card {
+            background: var(--white);
+            padding: 0 2rem 2rem 2rem;
+            border-radius: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border: 3px solid var(--masters-green);
+            overflow: hidden;
+        }
+
+        /* Standings Table - Masters Style */
+        .card h2 {
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
+            font-size: 2.5rem;
+            color: var(--black);
+            margin-bottom: 0;
+            letter-spacing: 4px;
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--masters-green);
+            color: var(--white);
+            border-radius: 0;
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            margin-top: 0;
+        }
+
+        thead {
+            background: var(--masters-green);
+            color: var(--white);
+        }
+
+        th {
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 1rem;
+            text-align: center;
+            border-right: 2px solid rgba(255,255,255,0.2);
+        }
+
+        th:last-child {
+            border-right: none;
+        }
+
+        td {
+            padding: 1.2rem 1rem;
+            text-align: center;
+            border-bottom: 2px solid #e0e0e0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        tbody tr {
+            background: var(--white);
+        }
+
+        tbody tr:nth-child(odd) {
+            background: #fafafa;
+        }
+
+        tbody tr:hover {
+            background: #f0f0f0;
+        }
+
+        /* Rank styling - Masters style */
+        .rank-1 { 
+            font-weight: bold; 
+            color: var(--masters-green);
+            font-size: 1.3rem;
+        }
+        .rank-2 { 
+            font-weight: bold; 
+            color: var(--black);
+        }
+        .rank-3 { 
+            font-weight: bold; 
+            color: var(--black);
+        }
+
+        /* Player List */
+        .player-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .player-card {
+            padding: 1rem;
+            background: var(--white);
+            border: 2px solid var(--masters-green);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .player-card.droppable {
+            border-color: #c44536;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .player-card.droppable:hover {
+            background: #fff0ed;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        .player-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--masters-green);
+        }
+
+        .player-points {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .drop-btn {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            background: #c44536;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .drop-btn:hover {
+            background: #a03428;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-box {
+            background: var(--masters-green);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--gold);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            color: var(--gold);
+        }
+
+        /* Available Players */
+        .player-pool {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .pool-player {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--masters-green);
+        }
+
+        .pool-player:hover {
+            background: #fafafa;
+        }
+
+        .add-btn {
+            padding: 0.5rem 1.5rem;
+            background: var(--masters-green);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Liberation Serif', 'Georgia', serif;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .add-btn:hover {
+            background: #003815;
+        }
+
+        .add-btn:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+        /* Transaction History */
+        .transaction {
+            padding: 1rem;
+            border-left: 4px solid var(--gold);
+            background: var(--white);
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+
+        .transaction-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .transaction-details {
+            font-weight: 600;
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none;
+        }
+
+        /* Search */
+        .search-box {
+            margin-bottom: 1.5rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--masters-green);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        /* Last updated */
+        .last-updated {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            padding: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .container { padding: 1rem; }
+            .player-list { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+            
+            header {
+                padding: env(safe-area-inset-top) 1rem 1rem;
+            }
+            
+            nav {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            
+            nav::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .nav-btn {
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 0.75rem 0.5rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .login-container {
+                margin: 50px 1rem;
+                padding: 2rem;
+            }
+        }
+
+        /* iOS Safe Area */
+        @supports (padding: max(0px)) {
+            body {
+                padding-bottom: max(0px, env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div style="font-family: 'Liberation Serif', Georgia, serif; font-size: 1.2rem; color: var(--masters-green); font-weight: bold;">
+                Loading League Data...
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container hidden">
+        <h2>Enter League</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="teamSelect">Select Your Team</label>
+                <select id="teamSelect" required>
+                    <option value="">-- Choose Team --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="password">Team Password</label>
+                <input type="password" id="password" required placeholder="Enter team password">
+            </div>
+            <button type="submit">Enter League</button>
+        </form>
+    </div>
+
+    <!-- Main App -->
+    <div id="mainApp" class="hidden">
+        <header>
+            <div class="header-content">
+                <img src="FG_Logo_Updated.png" alt="Fantasy Golf League" class="header-logo">
+            </div>
+        </header>
+
+        <div class="container">
+            <nav>
+                <button class="nav-btn active" onclick="showSection('leaderboard')">Leaderboard</button>
+                <button class="nav-btn" onclick="showSection('teamScores')">Team Scores</button>
+                <button class="nav-btn" onclick="showSection('dropAdds')">Drop/Adds</button>
+                <button class="nav-btn" onclick="showSection('playerSearch')">Player Search</button>
+                <button class="nav-btn" onclick="showSection('bylaws')">By-Laws</button>
+            </nav>
+
+            <!-- Leaderboard Section -->
+            <div id="leaderboardSection" class="section">
+                <div class="card">
+                    <h2>Leaderboard</h2>
+                    <table id="standingsTable">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Team</th>
+                                <th>Total Points</th>
+                                <th>1st Half</th>
+                                <th>2nd Half</th>
+                            </tr>
+                        </thead>
+                        <tbody id="standingsBody">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Team Scores Section -->
+            <div id="teamScoresSection" class="section hidden">
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Total Points</div>
+                        <div class="stat-value" id="teamTotalPoints">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Moves Remaining</div>
+                        <div class="stat-value" id="movesRemaining">5</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Current Rank</div>
+                        <div class="stat-value" id="currentRank">-</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>My Roster</h2>
+                    <div class="player-list" id="myRoster">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Player Search Section -->
+            <div id="playerSearchSection" class="section hidden">
+                <div class="card">
+                    <h2>Player Search</h2>
+                    <div class="search-box">
+                        <input type="text" id="playerSearchInput" placeholder="Enter player name..." style="margin-bottom: 1rem;" onkeypress="if(event.key === 'Enter') searchPlayer()">
+                        <button onclick="searchPlayer()" style="width: auto; padding: 0.75rem 2rem;">Search</button>
+                    </div>
+                    <div id="searchResult" style="margin-top: 2rem; padding: 2rem; text-align: center; font-size: 1.2rem; min-height: 100px;">
+                        <!-- Search results appear here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drop/Adds Section -->
+            <div id="dropAddsSection" class="section hidden">
+                <div class="card">
+                    <h2>Drop/Adds</h2>
+                    <div id="transactionsList">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- By-Laws Section -->
+            <div id="bylawsSection" class="section hidden">
+                <div class="card">
+                    <h2>By-Laws</h2>
+                    
+                    <div style="padding: 2rem; line-height: 1.8;">
+                        <h3 style="margin-top: 1.5rem; color: var(--masters-green);">1. Owners</h3>
+                        <p style="margin-left: 2rem;">There are ten owners: Andrew Abernathy, Carson Allen, John Carroll, John Egan, Jimmy Haverstick, Kent Mason, Todd Moran, Swan Nicolson, Steve Slayden, Steve Zamojski. Partners are welcome but there is one vote per team.</p>
+
+                        <h3 style="margin-top: 1.5rem; color: var(--masters-green);">2. The Draft</h3>
+                        <p style="margin-left: 2rem;">Owners will draft 8 players to complete their team. A drawing will determine the order in which owner's choose their draft position. A team with neither owner or partner at the Draft will get the last available position. The draft order will reverse with each round.</p>
+
+                        <h3 style="margin-top: 1.5rem; color: var(--masters-green);">3. The Season</h3>
+                        <p style="margin-left: 2rem;">The start of the season will be determined by the commissioner. The first half will conclude with The PGA Championship. The second half will conclude with The Tour Championship.</p>
+
+                        <h3 style="margin-top: 1.5rem; color: var(--masters-green);">4. Scoring</h3>
+                        <p style="margin-left: 2rem;"><strong>4.1</strong> For each tournament, players will score points based on the following:</p>
+                        <ul style="margin-left: 4rem;">
+                            <li>1st: 10 points</li>
+                            <li>2nd and ties: 5 points</li>
+                            <li>3rd and ties: 4 points</li>
+                            <li>4th and ties: 3 points</li>
+                            <li>5th and ties: 2 points</li>
+                        </ul>
+                        <p style="margin-left: 2rem;"><strong>4.2</strong> Any points earned by Scottie Scheffler will be multiplied by .5.</p>
+                        <p style="margin-left: 2rem;"><strong>4.3</strong> Points earned in the following tournaments will be multiplied by 1.5: The AT&T Pebble Beach Pro-Am, The Genesis Invitational, Arnold Palmer Invitational, RBC Heritage, Truist Championship, The Memorial Tournament, Travelers Championship.</p>
+                        <p style="margin-left: 2rem;"><strong>4.4</strong> Points earned in the following tournaments will be multiplied by 2: The Players Championship, The Tour Championship.</p>
+                        <p style="margin-left: 2rem;"><strong>4.5</strong> Points earned in the following tournaments "The Majors" will be multiplied by 3: The Masters, The PGA Championship, The US Open, The British Open.</p>
+                        <p style="margin-left: 2rem;"><strong>4.6</strong> Points will be accumulated by team to determine team position for first half, second half and overall.</p>
+
+                        <h3 style="margin-top: 1.5rem; color: var(--masters-green);">5. Trades and Drops</h3>
+                        <p style="margin-left: 2rem;"><strong>5.1</strong> Trades can be conducted up until the start of the British Open when a trade deadline will take effect. Trades are not subject to commissioner approval. The commissioner must be informed of a trade prior to the start of a tournament for the trade to be in effect during that tournament.</p>
+                        <p style="margin-left: 2rem;"><strong>5.2</strong> An owner can drop a player and pick up an unassigned player at any point during the season. There is a maximum of 5 drop/adds per season for each owner. Drop/Adds must be communicated by E-mail or WhatsApp to be official.</p>
+
+                        <h3 style="margin-top: 1.5rem; color: var(--masters-green);">6. Money</h3>
+                        <p style="margin-left: 2rem;"><strong>6.1</strong> Each owner will be responsible for $400/year for a total pot of $4000. The money will be distributed as follows:</p>
+                        <ul style="margin-left: 4rem;">
+                            <li>1st Half Winner: $550</li>
+                            <li>1st Half Runner-Up: $250</li>
+                            <li>2nd Half Winner: $550</li>
+                            <li>2nd Half Runner-Up: $250</li>
+                            <li>Overall Winner: $1,300</li>
+                            <li>Overall Runner-Up: $500</li>
+                            <li>Major Winner: $150/Major</li>
+                        </ul>
+
+                        <h3 style="margin-top: 1.5rem; color: var(--masters-green);">7. Commissioner Responsibilities</h3>
+                        <p style="margin-left: 2rem;"><strong>7.1</strong> Whoever wins the league is the Commissioner for the next year. The Commissioner agrees to:</p>
+                        <ul style="margin-left: 4rem;">
+                            <li>Set the date and plan the Draft trip.</li>
+                            <li>Manage the Draft.</li>
+                            <li>Keep score for the league and communicate scores at least every other week.</li>
+                            <li>Provide final scores and payments within one week The Tour Championship.</li>
+                        </ul>
+
+                        <h3 style="margin-top: 1.5rem; color: var(--masters-green);">8. The Last Night</h3>
+                        <p style="margin-left: 2rem;">On the Last Night of FG Draft Weekend, the team that finishes last will be responsible for providing a quality meal for all participants.</p>
+
+                        <h3 style="margin-top: 1.5rem; color: var(--masters-green);">9. By-Laws</h3>
+                        <p style="margin-left: 2rem;">Any owner may propose a change to these by-laws and all owners will vote on the proposed change at the draft. Once the by-laws go into effect, any owner can change the by-laws by proposing a change via e-mail to all owners. A majority yes vote will change the by-laws.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="last-updated" id="lastUpdated"></div>
+        </div>
+    </div>
+
+    <script>
+        let leagueData = null;
+        let currentTeam = null;
+
+        // Load league data from JSON file
+        async function loadLeagueData() {
+            try {
+                const response = await fetch('league-data.json');
+                if (!response.ok) {
+                    throw new Error('Could not load league data');
+                }
+                leagueData = await response.json();
+                
+                // Populate team dropdown
+                const teamSelect = document.getElementById('teamSelect');
+                Object.keys(leagueData.teams).sort().forEach(teamName => {
+                    const option = document.createElement('option');
+                    option.value = teamName;
+                    option.textContent = teamName;
+                    teamSelect.appendChild(option);
+                });
+                
+                // Update last updated timestamp
+                if (leagueData.lastUpdated) {
+                    document.getElementById('lastUpdated').textContent = 
+                        `Last updated: ${leagueData.lastUpdated}`;
+                }
+                
+                // Hide loading, show login
+                document.getElementById('loadingScreen').classList.add('hidden');
+                document.getElementById('loginScreen').classList.remove('hidden');
+                
+            } catch (error) {
+                document.getElementById('loadingScreen').innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <h2 style="color: var(--masters-green); margin-bottom: 1rem;">Unable to Load League Data</h2>
+                        <p style="color: #666;">Please make sure league-data.json is uploaded.</p>
+                        <button onclick="location.reload()" style="margin-top: 1rem; padding: 0.75rem 2rem; background: var(--masters-green); color: white; border: none; border-radius: 6px; cursor: pointer; font-family: 'Liberation Serif', Georgia, serif; font-size: 1rem;">
+                            Retry
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const team = document.getElementById('teamSelect').value;
+            const password = document.getElementById('password').value;
+            
+            if (password.length > 0) {
+                currentTeam = team;
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('mainApp').classList.remove('hidden');
+                loadDashboard();
+            } else {
+                alert('Please enter a password');
+            }
+        });
+
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+            // Remove active from all nav buttons
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(section + 'Section').classList.remove('hidden');
+            event.target.classList.add('active');
+            
+            // Load section-specific data
+            if (section === 'leaderboard') loadStandings();
+            if (section === 'teamScores') loadMyTeam();
+            if (section === 'dropAdds') loadTransactions();
+        }
+
+        function loadDashboard() {
+            loadStandings();
+            loadMyTeam();
+        }
+
+        function loadStandings() {
+            const tbody = document.getElementById('standingsBody');
+            tbody.innerHTML = '';
+            
+            // Sort teams by points
+            const sortedTeams = Object.entries(leagueData.teams)
+                .sort((a, b) => b[1].points - a[1].points);
+            
+            sortedTeams.forEach(([name, data], index) => {
+                const row = document.createElement('tr');
+                const rankClass = index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : '';
+                row.innerHTML = `
+                    <td class="${rankClass}">${index + 1}</td>
+                    <td><strong>${name}</strong></td>
+                    <td><strong>${data.points}</strong></td>
+                    <td>${data.firstHalf}</td>
+                    <td>${data.secondHalf}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function loadMyTeam() {
+            const teamData = leagueData.teams[currentTeam];
+            const roster = document.getElementById('myRoster');
+            roster.innerHTML = '';
+            
+            // Update stats
+            document.getElementById('teamTotalPoints').textContent = teamData.points;
+            document.getElementById('movesRemaining').textContent = 5 - teamData.movesUsed;
+            
+            // Calculate rank
+            const sortedTeams = Object.entries(leagueData.teams)
+                .sort((a, b) => b[1].points - a[1].points);
+            const rank = sortedTeams.findIndex(([name]) => name === currentTeam) + 1;
+            document.getElementById('currentRank').textContent = rank;
+            
+            // Display players
+            teamData.players.forEach(player => {
+                const card = document.createElement('div');
+                card.className = 'player-card';
+                card.innerHTML = `
+                    <div class="player-name">${player}</div>
+                    <div class="player-points">Season Total</div>
+                    <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Check Excel for detailed scoring</div>
+                `;
+                roster.appendChild(card);
+            });
+        }
+
+        function searchPlayer() {
+            const searchInput = document.getElementById('playerSearchInput').value.trim();
+            const resultDiv = document.getElementById('searchResult');
+            
+            if (!searchInput) {
+                resultDiv.innerHTML = '<p style="color: #666;">Please enter a player name</p>';
+                return;
+            }
+            
+            // Search through all team rosters (case-insensitive, partial match)
+            let foundTeam = null;
+            let foundPlayerName = null;
+            
+            for (const [teamName, teamData] of Object.entries(leagueData.teams)) {
+                const playerFound = teamData.players.find(player => 
+                    player.toLowerCase().includes(searchInput.toLowerCase())
+                );
+                
+                if (playerFound) {
+                    foundTeam = teamName;
+                    foundPlayerName = playerFound;
+                    break;
+                }
+            }
+            
+            // Display result
+            if (foundTeam) {
+                resultDiv.innerHTML = `
+                    <div style="background: var(--masters-green); color: var(--white); padding: 2rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; margin-bottom: 1rem; font-weight: bold;">${foundPlayerName}</div>
+                        <div style="font-size: 1.8rem; color: var(--gold); font-weight: bold;">${foundTeam}</div>
+                    </div>
+                `;
+            } else {
+                // Not on any team = Available
+                resultDiv.innerHTML = `
+                    <div style="background: var(--white); border: 3px solid var(--masters-green); color: var(--masters-green); padding: 2rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; margin-bottom: 1rem; font-weight: bold;">${searchInput}</div>
+                        <div style="font-size: 1.8rem; color: var(--gold); font-weight: bold;">Available</div>
+                    </div>
+                `;
+            }
+        }
+
+        function loadTransactions() {
+            const list = document.getElementById('transactionsList');
+            
+            if (leagueData.transactions.length === 0) {
+                list.innerHTML = '<p style="color: #666; text-align: center; padding: 2rem;">No transactions yet this season.</p>';
+                return;
+            }
+            
+            list.innerHTML = '';
+            leagueData.transactions.forEach(trans => {
+                const div = document.createElement('div');
+                div.className = 'transaction';
+                div.innerHTML = `
+                    <div class="transaction-date">${trans.date}</div>
+                    <div class="transaction-details">
+                        ${trans.team} ${trans.action === 'DROP' ? 'dropped' : 'added'} <strong>${trans.player}</strong>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        // Load data when page loads
+        loadLeagueData();
+    </script>
+</body>
+</html>

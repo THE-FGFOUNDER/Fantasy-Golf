@@ -1,0 +1,330 @@
+# FANTASY GOLF APP - DEPLOYMENT & USAGE GUIDE
+
+**EVERYTHING YOU NEED IS IN THE ZIP FILE**
+
+## WHAT'S INSIDE THE ZIP
+
+1. **fantasy-golf-app-updated.html** - Your web app
+2. **FG_Logo_Updated.png** - League logo
+3. **league-data.json** - Current league data (from your Excel)
+4. **update_league_data.py** - Python script to update data
+5. **INSTRUCTIONS.txt** - Detailed technical instructions
+
+---
+
+## QUICK START - GET YOUR APP ONLINE (20 minutes)
+
+### STEP 1: Extract the ZIP file
+Unzip `fantasy-golf-app-complete.zip` to a folder on your computer.
+
+### STEP 2: Rename the HTML file
+Rename `fantasy-golf-app-updated.html` to `index.html`
+- **Mac/Windows:** Right-click → Rename → Change to "index.html"
+
+### STEP 3: Deploy to GitHub Pages
+
+**Create the repository:**
+1. Go to https://github.com and log in
+2. Click the "+" in top right → "New repository"
+3. Repository name: `fantasy-golf-2026` (or whatever you want)
+4. Make it **Public**
+5. Check "Add a README file"
+6. Click "Create repository"
+
+**Upload your files:**
+1. In your new repository, click "Add file" → "Upload files"
+2. Drag these 3 files into the upload area:
+   - `index.html` (the renamed file)
+   - `FG_Logo_Updated.png`
+   - `league-data.json`
+3. Scroll down and click "Commit changes"
+
+**Enable GitHub Pages:**
+1. Click "Settings" tab (top of repository)
+2. Click "Pages" in left sidebar
+3. Under "Branch" → Select "main" (or "master")
+4. Click "Save"
+5. Wait 1-2 minutes
+6. Your app will be live at: `https://YOUR-USERNAME.github.io/fantasy-golf-2026`
+
+**Test it:**
+- Go to your URL
+- Make sure it loads correctly
+- Try logging in with one of your team names
+
+---
+
+## STEP 4: Set up weekly updates (One-time setup)
+
+### Install Python (if not already installed)
+- **Mac:** Already installed. Open Terminal and type `python3 --version` to confirm.
+- **Windows:** Download from python.org and install.
+
+### Install the required library
+Open Terminal (Mac) or Command Prompt (Windows) and run:
+```
+pip install openpyxl
+```
+(On Mac you might need: `pip3 install openpyxl`)
+
+### Organize your files
+Create a folder called "Fantasy Golf" on your computer and put these files in it:
+- `FG_2026_AI_Scores.xlsx` (your Excel file)
+- `update_league_data.py` (from the zip)
+
+---
+
+## WEEKLY WORKFLOW - UPDATE SCORES (2 minutes)
+
+**Every week after tournaments:**
+
+### 1. Update your Excel file
+Open `FG_2026_AI_Scores.xlsx` and add the tournament scores as you normally do. Save the file.
+
+### 2. Run the Python script
+
+**Mac:** 
+1. Open Terminal
+2. Type: `cd ` (with a space after cd)
+3. Drag the "Fantasy Golf" folder into Terminal window
+4. Press Enter
+5. Type: `python3 update_league_data.py`
+6. Press Enter
+
+**Windows:**
+1. Navigate to the "Fantasy Golf" folder in File Explorer
+2. Double-click `update_league_data.py`
+
+You'll see:
+```
+============================================================
+FANTASY GOLF - League Data Extractor
+============================================================
+
+Reading FG_2026_AI_Scores.xlsx...
+✓ Extracted 10 teams
+✓ Extracted 8 transactions
+✓ Found 16 available players
+✓ Saved to league-data.json
+
+SUCCESS! Your league-data.json file is ready.
+```
+
+A new `league-data.json` file is now in your "Fantasy Golf" folder.
+
+### 3. Upload to GitHub
+
+**Option A: Via GitHub Website (Easiest)**
+1. Go to your repository on GitHub
+2. Click on `league-data.json` (the old one)
+3. Click the pencil icon (Edit this file)
+4. Delete all the content
+5. Open your NEW `league-data.json` in a text editor
+6. Copy all the content
+7. Paste into GitHub
+8. Scroll down, click "Commit changes"
+
+**Option B: Upload new file**
+1. Go to your repository on GitHub
+2. Click "Add file" → "Upload files"
+3. Drag the NEW `league-data.json` from your "Fantasy Golf" folder
+4. It will say "league-data.json already exists" 
+5. Check "Replace existing file"
+6. Click "Commit changes"
+
+### 4. Wait and verify
+- Wait 1-2 minutes for GitHub Pages to rebuild
+- Go to your app URL and refresh (hard refresh: Cmd+Shift+R on Mac, Ctrl+Shift+R on Windows)
+- Verify scores are updated
+
+---
+
+## MANAGING DROP/ADDS
+
+When an owner wants to drop/add a player:
+
+1. **They contact you** (email, text, WhatsApp)
+2. **You update Excel:**
+   - Open the "Drop-Add Log" sheet
+   - Add: Date, Team Name, Dropped Player, Added Player
+   - Also update that team's roster in the "1st Half" sheet
+   - Save the file
+3. **Run the Python script** (same as weekly updates)
+4. **Upload the new league-data.json to GitHub** (same as weekly updates)
+
+The app will automatically show:
+- Updated team rosters
+- Updated "Moves Remaining" count
+- Transaction history in the Drop/Adds section
+
+---
+
+## HOW OWNERS USE THE APP
+
+### Logging In
+1. Go to your app URL: `https://YOUR-USERNAME.github.io/fantasy-golf-2026`
+2. Select their team from the dropdown
+3. Enter any password (this is just for identification, not real security)
+4. Click "Enter League"
+
+### What They Can Do
+- **Leaderboard:** See current standings
+- **Team Scores:** View their roster and stats
+- **Drop/Adds:** See all transactions this season
+- **Player Search:** Type any player name (or just last name) to find which team they're on
+- **By-Laws:** Read complete league rules
+
+### What They CANNOT Do
+- Make roster changes (they must contact you)
+- Edit scores
+- Change anyone else's team
+
+**This is by design** - you control the league, the app just displays it.
+
+---
+
+## SHARING THE APP WITH YOUR LEAGUE
+
+Once deployed, send this message to your league:
+
+```
+The Fantasy Golf app is live!
+
+URL: https://YOUR-USERNAME.github.io/fantasy-golf-2026
+
+Login:
+- Select your team name
+- Enter any password
+
+Features:
+- Live leaderboard
+- Your team roster & stats
+- Player search (find who's on which team)
+- Drop/Add history
+- Complete by-laws
+
+To make roster changes, contact me directly.
+
+Scores update weekly after tournaments.
+```
+
+---
+
+## TROUBLESHOOTING
+
+**"Module openpyxl not found" when running script**
+→ Run: `pip install openpyxl` (or `pip3 install openpyxl` on Mac)
+
+**"Could not find FG_2026_AI_Scores.xlsx"**
+→ Make sure your Excel file and the Python script are in the same folder
+
+**App shows old data after uploading to GitHub**
+→ Wait 2 minutes for GitHub Pages to rebuild, then hard refresh browser (Ctrl+Shift+R on Windows, Cmd+Shift+R on Mac)
+
+**"404 - Page not found" when visiting app URL**
+→ Make sure you enabled GitHub Pages in Settings → Pages
+→ Make sure the file is named `index.html` (not fantasy-golf-app-updated.html)
+
+**Images/logo not showing**
+→ Make sure `FG_Logo_Updated.png` is uploaded to the repository
+→ File names are case-sensitive
+
+---
+
+## COST
+
+**GitHub Pages:** Completely free for public repositories. No ongoing costs. No subscriptions.
+
+---
+
+## ADVANCED: Using Git (Optional)
+
+If you're comfortable with git command line, you can update even faster:
+
+```bash
+cd path/to/fantasy-golf-2026-repo
+cp ~/Fantasy\ Golf/league-data.json .
+git add league-data.json
+git commit -m "Update scores"
+git push
+```
+
+But the web interface works perfectly fine if you prefer that.
+
+---
+
+## FUTURE MAINTENANCE
+
+### When the season ends
+- Archive your Excel file: `FG_2026_FINAL.xlsx`
+- Create a new Excel file for next season: `FG_2027.xlsx`
+- Update the script to read the new file name (or just rename it to `FG_2026_AI_Scores.xlsx`)
+- Run the script with the new file
+- Upload the new league-data.json
+
+### If you want to change the app
+- Edit the `index.html` file locally
+- Upload the new version to GitHub
+- Changes go live in 1-2 minutes
+
+Or come back and ask me to make changes for you.
+
+---
+
+## WHAT THIS SYSTEM DOES
+
+✓ Beautiful, mobile-friendly app for your league  
+✓ Automatically pulls data from your Excel file  
+✓ Updates in 2 minutes per week  
+✓ You stay in control of all scoring and roster changes  
+✓ No database to maintain  
+✓ No ongoing costs  
+✓ Works on phones, tablets, computers  
+✓ Hosted on GitHub (reliable, free, no ads)  
+
+---
+
+## RECAP OF YOUR WORKFLOW
+
+**Week 1 (Setup):**
+1. Create GitHub repository (5 minutes)
+2. Upload 3 files (2 minutes)
+3. Enable GitHub Pages (2 minutes)
+4. Install Python and openpyxl (5 minutes)
+5. Share URL with league
+
+**Every Week After:**
+1. Update Excel scores (you do this anyway)
+2. Run Python script (double-click, 10 seconds)
+3. Upload league-data.json to GitHub (1 minute)
+4. Wait 1-2 minutes for it to go live
+
+**That's it.**
+
+You asked for a system where you update the spreadsheet and the app reflects it. This is exactly that, with one 2-minute step in between.
+
+---
+
+## YOUR FIRST DEPLOYMENT - CHECKLIST
+
+Before you start, make sure you have:
+- [ ] Extracted the ZIP file
+- [ ] Renamed `fantasy-golf-app-updated.html` to `index.html`
+- [ ] Logged into GitHub
+- [ ] 20 minutes of uninterrupted time
+
+Then follow STEP 3 above carefully, one step at a time.
+
+---
+
+## NEED HELP?
+
+If you get stuck during deployment:
+- Re-read the specific step carefully
+- Check that you renamed the HTML file to `index.html`
+- Verify GitHub Pages is enabled in Settings → Pages
+- Make sure repository is Public (not Private)
+- Wait 2-3 minutes after any changes for Pages to rebuild
+
+Good luck! Your league is going to love this.
+
